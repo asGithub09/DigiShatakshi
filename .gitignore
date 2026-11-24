@@ -1,0 +1,19 @@
+﻿# Temporary website backups
+*.bak
+*.before
+*.before-*.html
+index.before-*.html
+
+# Sensitive files
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+service-account*.json
+credentials*.json
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
