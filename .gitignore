@@ -12,6 +12,9 @@ index.before-*.html
 *.key
 service-account*.json
 credentials*.json
+payu-config.php
+payu-private/
+payu-data/
 
 # System files
 .DS_Store

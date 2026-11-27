@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /submit-inquiry.php
+Disallow: /index.before-
+Disallow: /index.html.before-
+
+Sitemap: https://digishatakshi.com/sitemap.xml
