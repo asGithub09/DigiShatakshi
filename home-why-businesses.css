@@ -1,0 +1,304 @@
+.ds-why {
+  --why-ink: #f3effa;
+  --why-muted: #c1c5d9;
+  --why-mint: #abe5ce;
+  --why-gold: #edcb88;
+  --why-surface: #20263a;
+  --why-feature: #202b3b;
+  --why-map: #17212e;
+  --why-node: #202e3d;
+  --why-line: #3b465e;
+  --why-grid-line: #34465477;
+  --why-shadow: #090e1c45;
+  padding-block: clamp(3.75rem, 7vw, 7rem);
+  color: var(--why-ink);
+  scroll-margin-top: 85px;
+}
+
+html.light .ds-why {
+  --why-ink: #232b40;
+  --why-muted: #4c5970;
+  --why-mint: #286759;
+  --why-gold: #77551e;
+  --why-surface: #fafbff;
+  --why-feature: #f1f8f5;
+  --why-map: #e9f2ee;
+  --why-node: #f9fcfa;
+  --why-line: #c1ccd7;
+  --why-grid-line: #a7c6bd55;
+  --why-shadow: #29374f15;
+}
+
+.ds-why-inner {
+  width: min(calc(100% - clamp(2rem, 7vw, 7rem)), 77rem);
+  margin-inline: auto;
+}
+
+.ds-why-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1.8fr) minmax(13.5rem, .7fr);
+  align-items: end;
+  gap: clamp(1.5rem, 6vw, 5rem);
+  margin-bottom: clamp(1.6rem, 4.5vw, 3.5rem);
+}
+
+#why-businesses-choose-us .ds-why-eyebrow {
+  margin: 0 0 .72rem;
+  color: var(--why-gold);
+  font-size: .73rem;
+  font-weight: 800;
+  line-height: 1.4;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+#why-businesses-choose-us .ds-why-header h2 {
+  max-width: 17ch;
+  margin: 0;
+  color: var(--why-ink);
+  font: 800 clamp(2.25rem, 4.9vw, 4.65rem)/1.04 var(--font-heading, Manrope, sans-serif);
+  letter-spacing: -.057em;
+  text-wrap: balance;
+}
+
+.ds-why-header h2 span {
+  color: var(--why-mint);
+}
+
+.ds-why-intro {
+  padding: .05rem 0 .05rem 1.15rem;
+  border-inline-start: 1px solid var(--why-line);
+}
+
+#why-businesses-choose-us .ds-why-intro p {
+  max-width: 32ch;
+  margin: 0 0 .45rem;
+  color: var(--why-muted);
+  font-size: 1rem;
+  line-height: 1.62;
+}
+
+.ds-why-link {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: .55rem;
+  color: var(--why-mint);
+  font-size: .9rem;
+  font-weight: 750;
+  text-underline-offset: .28em;
+}
+
+.ds-why-link span {
+  transition: transform .18s ease;
+}
+
+.ds-why-link:hover,
+.ds-why-link:focus-visible {
+  text-decoration-line: underline;
+}
+
+.ds-why-link:focus-visible {
+  border-radius: .15rem;
+  outline: 2px solid var(--why-mint);
+  outline-offset: 4px;
+}
+
+.ds-why-link:hover span {
+  transform: translate(2px, -2px);
+}
+
+.ds-why-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: clamp(.75rem, 1.4vw, 1.15rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ds-why-card {
+  --why-mark-ink: var(--why-mint);
+  min-width: 0;
+  grid-column: span 4;
+  padding: clamp(1.15rem, 2.5vw, 1.8rem);
+  border: 1px solid var(--why-line);
+  border-radius: .95rem;
+  background: var(--why-surface);
+}
+
+.ds-why-card[data-reason="goals"],
+.ds-why-card[data-reason="audience"] {
+  grid-column: span 5;
+}
+
+.ds-why-card-featured {
+  display: flex;
+  grid-column: span 7;
+  grid-row: span 2;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1.3rem, 3.4vw, 2.6rem);
+  border-block-start: 2px solid var(--why-mint);
+  background: var(--why-feature);
+  box-shadow: 0 20px 45px var(--why-shadow);
+}
+
+#why-businesses-choose-us .ds-why-card h3 {
+  margin: 0 0 .55rem;
+  color: var(--why-ink);
+  font: 800 clamp(1.15rem, 1.9vw, 1.55rem)/1.15 var(--font-heading, Manrope, sans-serif);
+  letter-spacing: -.027em;
+}
+
+#why-businesses-choose-us .ds-why-card-featured h3 {
+  max-width: 21ch;
+  margin-bottom: .75rem;
+  font-size: clamp(1.75rem, 3.1vw, 2.7rem);
+  letter-spacing: -.05em;
+  text-wrap: balance;
+}
+
+#why-businesses-choose-us .ds-why-detail {
+  max-width: 57ch;
+  margin: 0;
+  color: var(--why-muted);
+  font-size: .95rem;
+  line-height: 1.6;
+}
+
+.ds-why-example {
+  margin-top: clamp(1.35rem, 3vw, 2rem);
+  padding: clamp(.9rem, 2vw, 1.25rem);
+  border: 1px solid var(--why-line);
+  border-radius: .7rem;
+  background-color: var(--why-map);
+  background-image:
+    linear-gradient(90deg, var(--why-grid-line) 1px, transparent 1px),
+    linear-gradient(0deg, var(--why-grid-line) 1px, transparent 1px);
+  background-size: 17px 17px;
+}
+
+#why-businesses-choose-us .ds-why-example-label {
+  margin: 0 0 .7rem;
+  color: var(--why-mint);
+  font-size: .72rem;
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: .085em;
+  text-transform: uppercase;
+}
+
+.ds-why-journey {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ds-why-journey li {
+  position: relative;
+  display: grid;
+  align-content: center;
+  gap: .22rem;
+  min-height: 4.65rem;
+  padding: .65rem .65rem .72rem;
+  border: 1px solid var(--why-line);
+  border-radius: .55rem;
+  background: var(--why-node);
+}
+
+.ds-why-journey li + li::before {
+  position: absolute;
+  top: 50%;
+  right: calc(100% + .36rem);
+  width: .31rem;
+  height: .31rem;
+  transform: translateY(-50%) rotate(45deg);
+  border-top: 1px solid var(--why-mint);
+  border-right: 1px solid var(--why-mint);
+  content: "";
+}
+
+.ds-why-journey strong {
+  color: var(--why-ink);
+  font-size: .84rem;
+  font-weight: 750;
+  line-height: 1.26;
+}
+
+.ds-why-journey span {
+  color: var(--why-muted);
+  font-size: .75rem;
+  line-height: 1.38;
+}
+
+.ds-why-mark {
+  position: relative;
+  display: grid;
+  width: 2.3rem;
+  height: 2.3rem;
+  place-items: center;
+  margin-bottom: .9rem;
+  border: 1px solid var(--why-line);
+  border-radius: .6rem;
+  color: var(--why-mark-ink);
+}
+
+.ds-why-mark::before,
+.ds-why-mark::after {
+  display: block;
+  grid-area: 1 / 1;
+  box-sizing: border-box;
+  content: "";
+}
+
+[data-reason="goals"] .ds-why-mark::before { width: .95rem; height: .95rem; border: 1px solid; border-radius: 50%; }
+[data-reason="goals"] .ds-why-mark::after { width: .29rem; height: .29rem; border-radius: 50%; background: currentColor; }
+[data-reason="audience"] .ds-why-mark { --why-mark-ink: #b5c9f3; }
+[data-reason="audience"] .ds-why-mark::before { width: .45rem; height: .45rem; align-self: start; margin-top: .5rem; border: 1px solid; border-radius: 50%; }
+[data-reason="audience"] .ds-why-mark::after { width: .95rem; height: .47rem; align-self: end; margin-bottom: .48rem; border: 1px solid; border-radius: .45rem .45rem .12rem .12rem; }
+[data-reason="creative"] .ds-why-mark { --why-mark-ink: #d9c5fb; }
+[data-reason="creative"] .ds-why-mark::before { width: .68rem; height: .68rem; transform: translate(-.15rem, -.13rem) rotate(45deg); border: 1px solid; }
+[data-reason="creative"] .ds-why-mark::after { width: .52rem; height: .52rem; transform: translate(.2rem, .16rem) rotate(45deg); border: 1px solid; }
+[data-reason="reporting"] .ds-why-mark::before { width: .95rem; height: .82rem; border-inline-start: 1px solid; border-block-end: 1px solid; }
+[data-reason="reporting"] .ds-why-mark::after { width: .63rem; height: .33rem; transform: rotate(-29deg); border-inline-end: 1px solid; border-block-start: 1px solid; }
+[data-reason="growth"] .ds-why-mark { --why-mark-ink: var(--why-gold); }
+[data-reason="growth"] .ds-why-mark::before { width: .72rem; height: .72rem; transform: translate(-.14rem, .13rem); border-inline-start: 1px solid; border-block-end: 1px solid; }
+[data-reason="growth"] .ds-why-mark::after { width: .72rem; height: .72rem; transform: translate(.14rem, -.13rem); border-inline-end: 1px solid; border-block-start: 1px solid; }
+
+html.light .ds-why-card[data-reason="audience"] .ds-why-mark { --why-mark-ink: #3b6099; }
+html.light .ds-why-card[data-reason="creative"] .ds-why-mark { --why-mark-ink: #71539e; }
+
+@media (max-width: 1010px) {
+  .ds-why-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ds-why-grid .ds-why-card { grid-column: auto; }
+  .ds-why-grid .ds-why-card:last-child:nth-child(even) { grid-column: 1 / -1; }
+  .ds-why-grid .ds-why-card-featured { grid-column: 1 / -1; grid-row: auto; }
+}
+
+@media (max-width: 740px) {
+  .ds-why-header { grid-template-columns: minmax(0, 1fr); gap: .9rem; }
+  .ds-why-intro { padding: 0; border: 0; }
+}
+
+@media (max-width: 560px) {
+  .ds-why-grid,
+  .ds-why-journey { grid-template-columns: minmax(0, 1fr); }
+
+  .ds-why-journey li { min-height: 0; }
+  .ds-why-journey li + li::before {
+    top: auto;
+    right: auto;
+    bottom: calc(100% + .35rem);
+    left: 1rem;
+    transform: rotate(135deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-why-link span { transition: none; }
+  .ds-why-link:hover span { transform: none; }
+}

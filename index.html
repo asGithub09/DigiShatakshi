@@ -2272,6 +2272,11 @@ html.light footer .text-zinc-500 { color:#607080!important; }
     }
   }
 </style>
+  <link rel="stylesheet" href="services-pricing.css">
+  <link rel="stylesheet" href="/digisaathi.css">
+  <link rel="stylesheet" href="/home-process.css">
+  <link rel="stylesheet" href="/client-feedback.css">
+  <link rel="stylesheet" href="/home-why-businesses.css">
 </head>
 <body class="antialiased selection:bg-amber-500 selection:text-black">
 
@@ -2527,6 +2532,9 @@ html.light footer .text-zinc-500 { color:#607080!important; }
     </div>
   </div>
 
+  <script src="services-pricing.js"></script>
+  <script src="services-pricing-page.js"></script>
+  <script src="/client-feedback.js"></script>
   <script>
     // =========================================================================
     // DATA REPOSITORY (ALL 64 PAGES OF CONTENT STRUCTURED CLEANLY)
@@ -3073,6 +3081,87 @@ html.light footer .text-zinc-500 { color:#607080!important; }
     // =========================================================================
     // VIEW RENDERERS
     // =========================================================================
+    /**
+     * @typedef {{label:string, channel:string}} CustomerJourneyStep
+     * @typedef {{id:string, title:string, detail:string, journey?:CustomerJourneyStep[]}} BusinessReason
+     */
+    /** @type {BusinessReason[]} */
+    const HOME_BUSINESS_REASONS = [
+      {
+        id: 'connected',
+        title: 'Make every channel work together',
+        detail: 'Search, social, ads, and your website support the same customer journey. Each channel gives people a clear next step.',
+        journey: [
+          { label: 'Find you', channel: 'Search, social, or ads' },
+          { label: 'Understand your offer', channel: 'Website or landing page' },
+          { label: 'Get in touch', channel: 'Enquiry form or WhatsApp' }
+        ]
+      },
+      {
+        id: 'goals',
+        title: 'Start with your business goal',
+        detail: 'We agree on what you want to achieve, then choose the channels and work that support it.'
+      },
+      {
+        id: 'audience',
+        title: 'Know who you need to reach',
+        detail: 'We look at what your customers search for, the questions they ask, and what helps them decide.'
+      },
+      {
+        id: 'creative',
+        title: 'Test creative with data',
+        detail: 'We use engagement and conversion signals to refine the words, visuals, and calls to action.'
+      },
+      {
+        id: 'reporting',
+        title: 'Know what’s working',
+        detail: 'Reporting shows what changed, which numbers matter to your goal, and what we recommend doing next.'
+      },
+      {
+        id: 'growth',
+        title: 'Adapt as you grow',
+        detail: 'As your goals and audience change, we revisit your priorities and adjust the mix of services.'
+      }
+    ];
+
+    function renderHomeBusinessReasons() {
+      return `
+        <section id="why-businesses-choose-us" class="ds-why" aria-labelledby="ds-why-title">
+          <div class="ds-why-inner">
+            <header class="ds-why-header">
+              <div>
+                <p class="ds-why-eyebrow">Why Businesses Choose Us?</p>
+                <h2 id="ds-why-title">Built Around Clarity, Integration &amp; <span>Measurable Outcomes</span></h2>
+              </div>
+              <div class="ds-why-intro">
+                <p>Know what each channel does, how it fits with the rest, and how we’ll judge progress.</p>
+                <a class="ds-why-link" href="/services" onclick="if (!event.ctrlKey &amp;&amp; !event.metaKey &amp;&amp; !event.shiftKey &amp;&amp; !event.altKey) { navigateTo('services'); event.preventDefault(); }">Explore our services <span aria-hidden="true">↗</span></a>
+              </div>
+            </header>
+            <ul class="ds-why-grid" role="list">
+              ${HOME_BUSINESS_REASONS.map(reason => `
+                <li class="ds-why-card${reason.journey ? ' ds-why-card-featured' : ''}" data-reason="${reason.id}">
+                  ${reason.journey ? '' : '<span class="ds-why-mark" aria-hidden="true"></span>'}
+                  <h3>${reason.title}</h3>
+                  <p class="ds-why-detail">${reason.detail}</p>
+                  ${reason.journey ? `
+                    <div class="ds-why-example">
+                      <p class="ds-why-example-label" id="ds-why-example-label">Example customer journey</p>
+                      <ol class="ds-why-journey" role="list" aria-labelledby="ds-why-example-label">
+                        ${reason.journey.map(step => `
+                          <li><strong>${step.label}</strong><span>${step.channel}</span></li>
+                        `).join('')}
+                      </ol>
+                    </div>
+                  ` : ''}
+                </li>
+              `).join('')}
+            </ul>
+          </div>
+        </section>
+      `;
+    }
+
     function renderHomePage() {
       return `
         <!-- 1. HERO SECTION (Left Copy + Brand Intro Video) -->
@@ -3285,28 +3374,42 @@ html.light footer .text-zinc-500 { color:#607080!important; }
           </div>
         </section>
 
-        <!-- 4. OUR PROCESS: HOW WE WORK (6 Cards in a Row) -->
-        <section class="py-20 border-t border-white/10 bg-zinc-950/40">
-          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-2xl mb-12">
-              <span class="text-xs font-bold uppercase tracking-[0.22em] text-amber-400">Our Process</span>
-              <h2 class="font-display text-3xl sm:text-4xl font-extrabold mt-2">How We Work</h2>
-            </div>
-            <div class="process-stack process-stack-home">
+        <section id="our-process" class="ds-home-process" aria-labelledby="home-process-title">
+          <div class="ds-process-layout">
+            <header class="ds-process-heading">
+              <span class="ds-process-eyebrow">Our Process</span>
+              <h2 id="home-process-title">How We Work</h2>
+              <p>Six steps, from understanding your business to improving what we launch.</p>
+              <ul class="ds-process-phases" aria-label="Process phases">
+                <li><span>01–03</span><strong>Discovery and planning</strong></li>
+                <li><span>04</span><strong>Build and launch</strong></li>
+                <li><span>05–06</span><strong>Review and improve</strong></li>
+              </ul>
+            </header>
+            <ol class="ds-process-stack" role="list">
               ${[
-                { n: '01', t: 'Discover', d: 'Understand your business, audience, goals, and current digital presence.' },
-                { n: '02', t: 'Research', d: 'Analyze your market, competitors, audience behavior, and relevant opportunities.' },
-                { n: '03', t: 'Strategize', d: 'Build a digital marketing strategy based on your business objectives.' },
-                { n: '04', t: 'Execute', d: 'Implement SEO, content, social media, paid campaigns, web, and other relevant activities.' },
-                { n: '05', t: 'Measure', d: 'Track important performance indicators and campaign results.' },
-                { n: '06', t: 'Optimize', d: 'Use performance insights to improve campaigns and continuously refine the strategy.' }
-              ].map((step, index) => `
-                <article class="process-card process-reveal process-stack-card" style="--stack-index:${index};--stack-top:${112 + index * 9}px;--stack-z:${20 + index}" tabindex="0">
-                  <div class="process-card-top"><span class="process-number">${step.n}</span><span class="process-mark" aria-hidden="true">↗</span></div>
-                  <h3>${step.t}</h3><p>${step.d}</p><span class="process-track" aria-hidden="true"></span>
-                </article>
+                { art: 'discover', title: 'Understand your goals', text: 'We learn what your business offers, who you want to reach, and what you want to improve.', outcome: 'A shared goal and a clear starting point.' },
+                { art: 'research', title: 'Find the opportunities', text: 'We look at your market, competitors, and how customers search or decide what to buy.', outcome: 'A shortlist of opportunities worth pursuing.' },
+                { art: 'strategy', title: 'Agree on a plan', text: 'We choose the channels and activities that fit your goal and agree how we’ll measure progress.', outcome: 'Clear priorities and a way to judge progress.' },
+                { art: 'launch', title: 'Build and launch', text: 'We create and launch the agreed work, from a website or landing page to content, search, and ads.', outcome: 'New pages, content, or campaigns ready for your audience.' },
+                { art: 'measure', title: 'Review the results', text: 'We look at the numbers that matter for your goal, such as enquiries, search visibility, or campaign performance.', outcome: 'A clear view of what’s working and where to focus.' },
+                { art: 'improve', title: 'Improve what works', text: 'We use the results to decide what to keep, what to change, and what to test next.', outcome: 'A focused list of next changes or tests.' }
+              ].map((step, index, steps) => `
+                <li class="ds-process-card process-reveal" style="--stack-top:${112 + index * 9}px;--stack-z:${20 + index}">
+                  <article class="ds-process-card-layout" aria-labelledby="home-process-step-${index + 1}">
+                    <div class="ds-process-card-copy">
+                      <span class="ds-process-step">Step ${String(index + 1).padStart(2, '0')} <span>/</span> ${String(steps.length).padStart(2, '0')}</span>
+                      <h3 id="home-process-step-${index + 1}">${step.title}</h3>
+                      <p>${step.text}</p>
+                      <div class="ds-process-outcome"><strong>What you get</strong><span>${step.outcome}</span></div>
+                    </div>
+                    <div class="ds-process-art ds-process-art--${step.art}" aria-hidden="true">
+                      <div class="ds-process-figure"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                    </div>
+                  </article>
+                </li>
               `).join('')}
-            </div>
+            </ol>
           </div>
         </section>
 
@@ -3366,29 +3469,7 @@ html.light footer .text-zinc-500 { color:#607080!important; }
           </div>
         </section>
 
-        <!-- 5. WHY BUSINESSES CHOOSE US (6 Cards in 2 Rows of 3) -->
-        <section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="max-w-3xl mb-12">
-            <span class="text-xs font-bold uppercase tracking-[0.22em] text-amber-400">Why Businesses Choose Us?</span>
-            <h2 class="font-display text-3xl sm:text-4xl font-extrabold mt-2">Built Around Clarity, Integration & Measurable Outcomes</h2>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            ${[
-              { t: 'Business-First Strategy', d: 'We begin with your business objectives rather than simply choosing a marketing channel.' },
-              { t: 'Integrated Digital Marketing', d: 'SEO, content, social media, paid advertising, and web work together instead of operating as disconnected activities.' },
-              { t: 'Audience-Centric Thinking', d: 'We focus on understanding who you want to reach and what motivates them to take action.' },
-              { t: 'Creative + Data', d: 'Strong creative builds attention, while data helps guide optimization.' },
-              { t: 'Transparent Performance Communication', d: 'Clear communication and understandable reporting keep you informed about your marketing activity.' },
-              { t: 'Scalable Solutions', d: 'Our services can evolve as your business, audience, and digital requirements grow.' }
-            ].map(item => `
-              <div class="spotlight-card rounded-3xl p-7">
-                <div class="w-10 h-10 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold mb-4">✦</div>
-                <h3 class="font-display text-xl font-bold mb-2">${item.t}</h3>
-                <p class="text-sm text-zinc-400 leading-relaxed">${item.d}</p>
-              </div>
-            `).join('')}
-          </div>
-        </section>
+        ${renderHomeBusinessReasons()}
 
         <!-- 6. HIGHLIGHTS BAR (4 Horizontal Metrics) -->
         <section id="proof-points" class="proof-section py-16 border-y border-white/10">
@@ -3445,29 +3526,7 @@ html.light footer .text-zinc-500 { color:#607080!important; }
             </div>
           </div>
 
-          <!-- Testimonials (4 Cards) -->
-          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="mb-10">
-              <span class="text-xs font-bold uppercase tracking-[0.22em] text-amber-400">Client Feedback</span>
-              <h2 class="font-display text-3xl sm:text-4xl font-extrabold mt-2">What Our Partners Say</h2>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              ${[
-                { name: 'Rohan Srivastava', role: 'Real Estate Developer, Lucknow', quote: 'Digi Shatakshi restructured our landing pages and Google Ads, doubling our qualified site-visit inquiries within two months.' },
-                { name: 'Dr. Neha Verma', role: 'Healthcare & Wellness Clinic', quote: 'Their local SEO strategy placed our clinic in top Lucknow search results, bringing consistent organic patient appointments.' },
-                { name: 'Amitabh Tiwari', role: 'EdTech & Training Institute', quote: 'Clear reporting, structured social media campaigns, and lead generation funnels that genuinely understand student intent.' },
-                { name: 'Priya Malhotra', role: 'D2C Lifestyle Brand', quote: 'From brand identity refresh to Meta ad creatives, their integrated team connected every touchpoint seamlessly.' }
-              ].map(t => `
-                <div class="spotlight-card rounded-3xl p-6 flex flex-col justify-between">
-                  <p class="text-sm text-zinc-300 italic leading-relaxed mb-6">"${t.quote}"</p>
-                  <div class="testimonial-card-footer pt-4 border-t border-white/10">
-                    <div class="font-display font-bold text-white text-sm">${t.name}</div>
-                    <div class="text-xs text-amber-400 mt-0.5">${t.role}</div>
-                  </div>
-                </div>
-              `).join('')}
-            </div>
-          </div>
+          ${window.DS_CLIENT_FEEDBACK?.render() ?? ''}
         </section>
 
         <!-- 8. BLOGS PREVIEW (3 Cards in a Row) -->
@@ -3904,113 +3963,9 @@ html.light footer .text-zinc-500 { color:#607080!important; }
       `;
     }
 
-    const PRICING_CATEGORIES = {
-      website: {
-        label: 'Websites Pricing', intro: 'Conversion-focused websites with clear scope, reliable foundations and room to grow.', billing: 'one-time project fee',
-        plans: [
-          {id:'website-landing',name:'Landing Page',price:'₹25,000',tag:'For a focused campaign',features:['1 responsive landing page','Lead capture form and WhatsApp CTA','Mobile-first layout','Basic on-page SEO','Launch support']},
-          {id:'website-business',name:'Business Website',price:'₹35,000',tag:'Most popular for growing brands',popular:true,features:['Up to 6 core pages','Responsive custom-styled design','Contact form and WhatsApp integration','On-page SEO foundations','Speed and analytics setup','30 days post-launch support']},
-          {id:'website-ecommerce',name:'E-Commerce Website',price:'₹45,000',tag:'For selling online',features:['Storefront with up to 30 products','Cart and checkout setup','Payment gateway integration*','Order and inventory basics','Responsive design','Admin handover and training']}
-        ], note:'Domain, hosting renewals, paid plugins, payment-gateway fees, product photography and advanced integrations are quoted separately where applicable. *Gateway approval and provider charges are subject to the provider.'
-      },
-      smm: {
-        label: 'Social Media Marketing', intro: 'Consistent content, platform management and practical reporting for growing brands.', billing: 'month',
-        plans: [
-          {id:'smm-basic',name:'Basic SMM',cardHeader:'01 · BASIC',cardHeaderClass:'bg-gradient-to-r from-cyan-400 to-sky-300 text-slate-950',cardBorder:'border-cyan-300/40',price:'₹25,000',tag:'Essential Brand Presence',description:'Build a professional and consistent online presence.',deliverables:[['Posts','2'],['Static posts','2'],['Carousel posts','2'],['Reels','4'],['Stories','2 per week'],['Professional shoot','Included'],['Reel editing','Included']],features:['Content planning and calendar','Creative design and captions','Hashtag research','Content scheduling']},
-          {id:'smm-moderate',name:'Moderate SMM',cardHeader:'02 · MODERATE',cardHeaderClass:'bg-gradient-to-r from-orange-600 to-amber-500 text-white',cardBorder:'border-orange-400/50',price:'₹35,000',tag:'Brand Growth',description:'Increase brand visibility, engagement and audience reach.',popular:true,popularLabel:'Popular choice',deliverables:[['Posts','12'],['Static posts','3'],['Carousel posts','3'],['Trial reels','2'],['Stories','4 per week'],['Professional shoot','Included'],['Reel editing','Included']],features:['Strategic content planning','Premium creative designing','Captions and hashtag strategy','Content scheduling','Engagement monitoring','Monthly performance report']},
-          {id:'smm-advanced',name:'Premium SMM',cardHeader:'03 · PREMIUM',cardHeaderClass:'bg-gradient-to-r from-violet-800 to-indigo-700 text-white',cardBorder:'border-violet-400/50',price:'₹45,000',tag:'Complete Brand Management',description:'A comprehensive content and social media solution for ambitious brands.',deliverables:[['Posts','16'],['Static posts','4'],['Carousel posts','4'],['Reels','4'],['Trial reels','3'],['Stories','6 per week*'],['Professional shoot','Included*']],features:['Advanced content strategy','Premium graphic designing','Brand storytelling','Content calendar and scheduling','Community management','Competitor analysis','Monthly analytics and reporting','Poll & questionnaire']}
-        ], note:'Paid promotions, influencer fees and premium stock assets are not included unless agreed in writing. *Premium Stories and professional shoots are scoped with the monthly content plan.'
-      },
-      seo: {
-        label: 'SEO & Search Ranking', intro: 'Build sustainable search visibility through technical, on-page and local SEO improvements.', billing: 'per month',
-        plans: [
-          {id:'seo-local',name:'Local SEO',price:'₹9,999',tag:'For local discovery',features:['Google Business Profile optimisation','Local keyword targeting','On-page optimisation for up to 5 pages','Basic citation and listing review','Monthly ranking and activity report']},
-          {id:'seo-growth',name:'Growth SEO',price:'₹19,999',tag:'Most popular for growing brands',popular:true,features:['Keyword research and mapping','On-page optimisation for up to 10 pages','Technical SEO checks','2 SEO content pieces per month','Local SEO and competitor review','Monthly performance report']},
-          {id:'seo-advanced',name:'Advanced SEO',price:'₹34,999',tag:'For competitive markets',features:['Broader technical SEO programme','Keyword and content strategy','On-page optimisation for up to 20 pages','4 SEO content pieces per month','Authority and backlink opportunity review','Conversion and performance reporting']}
-        ], note:'SEO outcomes depend on competition, website condition, content approvals and implementation timelines. Third-party placements, paid links and major development work are excluded.'
-      },
-      ads: {
-        label: 'Paid Ads & Lead Gen', intro: 'Campaign strategy, optimisation and reporting to turn ad budgets into measurable enquiries.', billing: 'per month management fee',
-        plans: [
-          {id:'ads-meta',name:'Meta Ads Starter',price:'₹9,999',tag:'Facebook and Instagram',features:['One Meta ad account','Campaign and audience setup','Up to 2 campaign objectives','Ad copy and basic creative direction','Pixel/event check where available','Monthly optimisation report']},
-          {id:'ads-google',name:'Google Ads Growth',price:'₹14,999',tag:'Most popular for intent-led leads',popular:true,features:['Google Search campaign management','Keyword and negative keyword research','Conversion tracking review','Ad copy and extensions','Search-term and bid optimisation','Monthly performance report']},
-          {id:'ads-multichannel',name:'Multi-Channel Performance',price:'₹27,500',tag:'For coordinated acquisition',features:['Google Search + Meta campaign management','Audience and keyword strategy','Campaign and creative testing plan','Conversion tracking review','Weekly optimisation checks','Monthly performance review']}
-        ], note:'These are campaign-management fees only. Advertising spend is paid directly by the client to Google/Meta and is not included. Landing page development and video production are separate.'
-      }
-    };
-
-    let payuCheckoutEnabled = false;
-
-    function pricingWhatsAppUrl(plan, category, intent) {
-      const message = `Hello Digi Shatakshi! I am interested in the ${plan} package under ${category}. I would like to ${intent}. Please share the scope, availability and next steps.`;
-      return `https://wa.me/917310251337?text=${encodeURIComponent(message)}`;
-    }
-
-    function renderPricingCards(categoryKey) {
-      const category = PRICING_CATEGORIES[categoryKey] || PRICING_CATEGORIES.website;
-      return `
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="text-center max-w-3xl mx-auto">
-            <span class="text-xs font-bold uppercase tracking-[0.22em] text-amber-400">${category.billing === 'one-time project fee' ? 'One-time project pricing' : 'Transparent monthly pricing'}</span>
-            <h1 class="font-display text-4xl sm:text-5xl font-extrabold mt-3">${category.label}</h1>
-            <p class="mt-4 text-zinc-400">${category.intro}</p>
-          </div>
-          <div class="pricing-plans-grid grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-12 text-left">
-            ${category.plans.map(plan => `
-              <article class="pricing-plan-card spotlight-card relative h-full min-h-[650px] rounded-3xl flex flex-col overflow-hidden border ${plan.cardBorder || (plan.popular ? 'border-emerald-400 shadow-2xl shadow-emerald-500/15' : 'border-white/10')} bg-slate-800/80">
-                ${plan.cardHeader ? `<div class="px-6 py-4 text-center text-lg font-extrabold tracking-wide ${plan.cardHeaderClass}">${plan.cardHeader}</div>` : ''}
-                <div class="p-6 sm:p-7 ${plan.cardHeader ? 'pt-5' : 'pt-14'} flex flex-col flex-1">
-                  ${plan.popular ? (plan.cardHeader ? `<div class="flex justify-end"><span class="rounded-full bg-amber-300/15 text-amber-200 text-[10px] font-extrabold uppercase tracking-wider px-3 py-1.5">${plan.popularLabel}</span></div>` : '<span class="absolute top-4 left-6 z-10 inline-flex items-center rounded-full bg-emerald-400 text-slate-950 text-[10px] font-extrabold uppercase tracking-wider px-3 py-1.5 shadow-lg shadow-emerald-500/20">★ MOST POPULAR</span>') : ''}
-                  ${plan.cardHeader ? `<h2 class="font-display text-xl font-extrabold text-center ${plan.popular ? 'mt-1' : ''}">${plan.tag}</h2>` : `<p class="text-xs font-bold uppercase tracking-widest text-amber-400">${plan.tag}</p><h2 class="font-display text-2xl font-extrabold mt-3">${plan.name}</h2>`}
-                  <p class="${plan.cardHeader ? 'mt-4 justify-center' : 'mt-5'} flex flex-wrap items-baseline gap-2"><strong class="text-4xl sm:text-5xl font-extrabold tracking-tight">${plan.price}</strong><span class="text-sm text-zinc-400">/ ${category.billing}</span></p>
-                  ${plan.description ? `<p class="mt-3 text-sm text-zinc-300 leading-relaxed ${plan.cardHeader ? 'text-center' : ''}">${plan.description}</p>` : ''}
-                  <div class="h-px bg-white/10 my-6"></div>
-                  ${plan.deliverables ? `<div class="text-sm text-zinc-200"><div class="grid grid-cols-[minmax(0,1fr)_auto] gap-3 border-b border-white/15 pb-2 font-semibold"><span>Deliverables</span><span class="text-right">Monthly quantity</span></div><ul>${plan.deliverables.map(([label, quantity]) => `<li class="grid grid-cols-[minmax(0,1fr)_auto] gap-3 border-b border-white/10 py-2.5"><span>${label}</span><span class="text-right font-medium text-zinc-100">${quantity}</span></li>`).join('')}</ul></div><ul class="mt-5 space-y-2.5 text-sm text-zinc-200">${plan.features.map(feature => `<li class="flex items-start gap-2 leading-relaxed"><span class="text-amber-400">-</span><span>${feature}</span></li>`).join('')}</ul>` : `<ul class="space-y-3 text-sm text-zinc-200 flex-1">${plan.features.map(f => `<li class="flex items-start gap-3 min-w-0 leading-relaxed"><span class="text-amber-400 font-bold">✓</span><span class="min-w-0 break-words">${f}</span></li>`).join('')}</ul>`}
-                  <div class="grid grid-cols-1 gap-3 mt-auto pt-8">
-                    ${payuCheckoutEnabled ? `<a href="/payu-checkout.php?plan=${encodeURIComponent(plan.id)}" class="text-center rounded-xl px-5 py-3.5 border border-emerald-300/40 bg-emerald-400/10 text-emerald-100 font-bold text-sm hover:bg-emerald-400/20 transition">${category.billing === 'one-time project fee' ? 'Pay once securely' : 'Subscribe monthly securely'}</a>` : ''}
-                    <a href="${pricingWhatsAppUrl(plan.name, category.label, 'book this package')}" target="_blank" rel="noopener noreferrer" class="text-center rounded-xl px-5 py-3.5 bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-bold text-sm hover:brightness-110 transition">Book Now ↗</a>
-                    <a href="${pricingWhatsAppUrl(plan.name, category.label, 'ask about a free initial consultation or trial')}" target="_blank" rel="noopener noreferrer" class="text-center rounded-xl px-5 py-3.5 border border-white/20 bg-white/5 text-white font-semibold text-sm hover:bg-white/10 transition">Try Us for Free</a>
-                  </div>
-                </div>
-              </article>`).join('')}
-          </div>
-          <p class="text-xs text-zinc-500 mt-8 max-w-4xl mx-auto text-center leading-relaxed">${category.note} Listed package amounts are charged as shown at checkout; no separate GST line is displayed. Final scope is confirmed after a short discovery discussion.</p>
-          <div class="mt-9 flex flex-wrap justify-center gap-3"><a href="${pricingWhatsAppUrl('Custom', category.label, 'discuss a custom requirement')}" target="_blank" rel="noopener noreferrer" class="rounded-full px-6 py-3 bg-white/10 border border-white/15 text-sm font-semibold hover:bg-white/15">Request a Custom Plan</a><button onclick="navigateTo('contact')" class="rounded-full px-6 py-3 border border-white/15 text-sm font-semibold">Talk to Our Team</button></div>
-        </div>`;
-    }
-
-    function selectPricingCategory(categoryKey, shouldScroll = false) {
-      const key = PRICING_CATEGORIES[categoryKey] ? categoryKey : 'website';
-      document.querySelectorAll('[data-pricing-tab]').forEach(tab => {
-        const active = tab.dataset.pricingTab === key;
-        tab.setAttribute('aria-selected', active ? 'true' : 'false');
-        tab.classList.toggle('bg-violet-600', active);
-        tab.classList.toggle('text-white', active);
-        tab.classList.toggle('bg-slate-800', !active);
-        tab.classList.toggle('text-zinc-200', !active);
-      });
-      const panel = document.getElementById('pricing-category-content');
-      if (panel) panel.innerHTML = renderPricingCards(key);
-      if (shouldScroll) document.getElementById('pricing-category-content')?.scrollIntoView({behavior:'smooth',block:'start'});
-    }
-
     function renderPricingPage() {
-      return `
-        <main class="relative z-10 min-h-screen pt-28 pb-20">
-          <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
-            <div class="text-center max-w-3xl mx-auto mb-10">
-              <span class="text-xs font-bold uppercase tracking-[0.22em] text-amber-400">Straightforward packages. Clear deliverables.</span>
-              <h1 class="font-display text-4xl sm:text-5xl font-extrabold mt-3">Pricing That Fits Your Growth</h1>
-              <p class="text-zinc-400 mt-4">Explore website development, social media, SEO and paid advertising packages. Choose a category to compare deliverables and starting prices.</p>
-            </div>
-            <div class="flex flex-wrap justify-center gap-3 mb-10" role="tablist" aria-label="Pricing categories">
-              ${Object.entries(PRICING_CATEGORIES).map(([key, item], i) => `<button type="button" role="tab" aria-selected="${i===0?'true':'false'}" data-pricing-tab="${key}" onclick="selectPricingCategory('${key}')" class="rounded-full px-5 py-3 text-sm font-bold border border-white/10 transition ${i===0?'bg-violet-600 text-white':'bg-slate-800 text-zinc-200 hover:bg-slate-700'}">${item.label}</button>`).join('')}
-            </div>
-          </section>
-          <section id="pricing-category-content" aria-live="polite">${renderPricingCards('website')}</section>
-        </main>`;
+      return window.DS_SERVICE_PRICING_PAGE.render();
     }
-
     function renderDedicatedServicePage(serviceKey) {
       const s = SERVICE_PAGES[serviceKey];
       if (!s) return renderServicesOverviewPage();
@@ -4027,7 +3982,7 @@ html.light footer .text-zinc-500 { color:#607080!important; }
             <p class="text-base sm:text-lg text-zinc-400 leading-relaxed">${s.heroH3}</p>
             <div class="flex flex-wrap gap-4 pt-2">
               <button onclick="openBookingModal('${s.heroSub}')" class="px-7 py-3.5 rounded-full bg-amber-500 text-zinc-950 font-bold text-sm">${s.primaryCta}</button>
-              <button onclick="navigateTo('pricing'); selectPricingCategory('${serviceKey === 'service-smm' ? 'smm' : serviceKey === 'service-seo' ? 'seo' : serviceKey === 'service-ads' || serviceKey === 'service-leads' ? 'ads' : 'website'}')" class="px-7 py-3.5 rounded-full border border-violet-400/50 bg-violet-500/10 text-violet-200 text-sm font-semibold">View Relevant Pricing</button>
+              <button onclick="window.DS_SERVICE_PRICING_PAGE.navigateToService('${serviceKey === 'service-smm' ? 'social-media' : serviceKey === 'service-seo' ? 'seo-search-ranking' : serviceKey === 'service-ads' || serviceKey === 'service-leads' ? 'paid-ads-lead-gen' : 'website-pricing'}')" class="px-7 py-3.5 rounded-full border border-violet-400/50 bg-violet-500/10 text-violet-200 text-sm font-semibold">View Relevant Pricing</button>
               <button onclick="navigateTo('services')" class="px-7 py-3.5 rounded-full border border-white/15 bg-white/5 text-sm font-semibold">Explore Our Services</button>
             </div>
           </div>
@@ -4078,12 +4033,12 @@ html.light footer .text-zinc-500 { color:#607080!important; }
         ${serviceKey === 'service-smm' ? `
         <section class="py-20 border-y border-white/10 bg-zinc-950/40" id="smm-pricing">
           <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <span class="text-xs font-bold uppercase tracking-[0.22em] text-amber-400">Simple monthly plans</span>
+            <span class="text-xs font-bold uppercase tracking-[0.22em] text-amber-400">Social media package options</span>
             <h2 class="font-display text-3xl sm:text-4xl font-extrabold mt-2">SMM Packages That Fit Your Growth Stage</h2>
-            <p class="text-sm text-zinc-400 mt-3">Starting from ₹25,000/month. Compare all three packages and choose what suits your business.</p>
+            <p class="text-sm text-zinc-400 mt-3">Compare the published content inclusions and request a quote. Feed-post billing period and Social Pro shoot and editing scope are confirmed with the team.</p>
             <div class="flex flex-wrap justify-center gap-3 mt-7">
-              <button onclick="navigateTo('pricing'); selectPricingCategory('smm')" class="rounded-full px-7 py-3 bg-amber-500 text-zinc-950 font-bold text-sm">View SMM Pricing</button>
-              <a href="https://wa.me/917310251337?text=Hello%20Digi%20Shatakshi!%20I%20would%20like%20to%20try%20your%20SMM%20services%20for%20free.%20Please%20share%20the%20next%20steps." target="_blank" rel="noopener noreferrer" class="rounded-full px-7 py-3 border border-white/15 bg-white/5 text-sm font-semibold">Try Us for Free</a>
+              <button onclick="window.DS_SERVICE_PRICING_PAGE.navigateToService('social-media')" class="rounded-full px-7 py-3 bg-amber-500 text-zinc-950 font-bold text-sm">View SMM Pricing</button>
+
             </div>
           </div>
         </section>` : ''}
@@ -4617,7 +4572,7 @@ html.light footer .text-zinc-500 { color:#607080!important; }
       pricing: {
         path: '/pricing',
         title: 'Digital Marketing Pricing | Digi Shatakshi',
-        description: 'Review Digi Shatakshi digital marketing service plans and pricing options for businesses planning their online marketing.'
+        description: 'Explore Digi Shatakshi service scopes and social media package inclusions, then request a quote tailored to your project.'
       },
       blog: {
         path: '/blog',
@@ -4788,11 +4743,12 @@ html.light footer .text-zinc-500 { color:#607080!important; }
       if (view === 'home') root.innerHTML = renderHomePage();
       else if (view === 'about') root.innerHTML = renderAboutPage();
       else if (view === 'services') root.innerHTML = renderServicesOverviewPage();
-      else if (view === 'pricing') root.innerHTML = renderPricingPage();
+      else if (view === 'pricing') { root.innerHTML = renderPricingPage(); window.DS_SERVICE_PRICING_PAGE.init(); }
       else if (view === 'blog') root.innerHTML = renderBlogPage();
       else if (view === 'contact') root.innerHTML = renderContactPage();
       else if (SERVICE_PAGES[view]) root.innerHTML = renderDedicatedServicePage(view);
       else root.innerHTML = renderHomePage();
+      window.DS_CLIENT_FEEDBACK?.mount(root);
       initDeferredVideos();
 
       // Update active nav highlight
@@ -4983,20 +4939,6 @@ html.light footer .text-zinc-500 { color:#607080!important; }
     const routeMap = { '/': 'home', '/pricing': 'pricing', '/about': 'about', '/services': 'services', '/blog': 'blog', '/contact': 'contact' };
     const initialView = routeMap[initialPath] || (SERVICE_PAGES[initialPath.slice(1)] ? initialPath.slice(1) : 'home');
     navigateTo(initialView, false);
-    if (window.location.protocol !== 'file:') {
-      fetch('/payu-status.php', { cache: 'no-store', headers: { Accept: 'application/json' } })
-        .then(response => response.ok ? response.json() : null)
-        .then(result => {
-          if (result?.enabled !== true) return;
-          payuCheckoutEnabled = true;
-          if (currentView === 'pricing') {
-            const selectedTab = document.querySelector('[data-pricing-tab][aria-selected="true"]');
-            const panel = document.getElementById('pricing-category-content');
-            if (panel) panel.innerHTML = renderPricingCards(selectedTab?.dataset.pricingTab || 'website');
-          }
-        })
-        .catch(error => console.warn('PayU checkout availability could not be checked.', error));
-    }
     window.addEventListener('popstate', () => {
       const path = window.location.pathname.replace(/\/+$/, '') || '/';
       const view = routeMap[path] || (SERVICE_PAGES[path.slice(1)] ? path.slice(1) : 'home');
@@ -6620,7 +6562,8 @@ const CrystalizedBall = ({
             <div class="ds-quote-field"><label for="ds-q-name">Your name *</label><input id="ds-q-name" name="name" autocomplete="name" placeholder="e.g. Rahul Sharma" required></div>
             <div class="ds-quote-field"><label for="ds-q-phone">Your phone number *</label><input id="ds-q-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" pattern="[0-9+()\s-]{8,18}" placeholder="Your contact number" required></div>
             <div class="ds-quote-field ds-full"><label for="ds-q-business">Business / brand name</label><input id="ds-q-business" name="business" autocomplete="organization" placeholder="Your business name (optional)"></div>
-            <div class="ds-quote-field ds-full"><label for="ds-q-service">Which service are you interested in? *</label><select id="ds-q-service" name="service" required><option value="" selected disabled>Select a service</option><option>Search Engine Optimization (SEO)</option><option>Social Media Marketing</option><option>Paid Advertising (Google / Meta Ads)</option><option>Website & Landing Pages</option><option>Content Marketing</option><option>Branding & Creative</option><option>Lead Generation</option><option>Marketing Automation</option><option>Not sure — need guidance</option></select></div>
+            <div class="ds-quote-field ds-full"><label for="ds-q-service">Which service are you interested in? *</label><select id="ds-q-service" name="service" required><option value="" selected disabled>Select a service</option><option>Content Marketing</option><option>Branding & Creative</option><option>Lead Generation</option><option>Marketing Automation</option><option>Not sure — need guidance</option></select></div>
+            <input id="ds-q-plan" name="plan" type="hidden"><p id="ds-q-selection" class="ds-q-selection ds-full" aria-live="polite" hidden></p>
             <div class="ds-quote-field"><label for="ds-q-budget">Approx. monthly budget</label><select id="ds-q-budget" name="budget"><option value="Not decided">Not decided yet</option><option>Under ₹10,000</option><option>₹10,000–₹25,000</option><option>₹25,000–₹50,000</option><option>₹50,000–₹1,00,000</option><option>₹1,00,000+</option></select></div>
             <div class="ds-quote-field"><label for="ds-q-city">City</label><input id="ds-q-city" name="city" placeholder="e.g. Lucknow"></div>
             <div class="ds-quote-field ds-full"><label for="ds-q-message">Project requirements</label><textarea id="ds-q-message" name="message" placeholder="Briefly describe your goals or requirements..."></textarea></div>
@@ -6636,37 +6579,110 @@ const CrystalizedBall = ({
 (function(){
   const modal=document.getElementById('ds-quote-modal');
   let lastFocus=null;
-  window.dsOpenQuoteModal=function(){if(!modal)return;lastFocus=document.activeElement;window.dsHideChristmasPromo?.();modal.classList.add('is-open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';const video=modal.querySelector('video');if(video){if(!video.hasAttribute('src')){video.src=video.dataset.src;video.load()}video.play?.().catch(()=>{})}setTimeout(()=>document.getElementById('ds-q-name')?.focus(),80)};
+  const serviceSelect=document.getElementById('ds-q-service');
+  const planInput=document.getElementById('ds-q-plan');
+  const selectionSummary=document.getElementById('ds-q-selection');
+  const quoteCatalog=window.DS_SERVICE_PRICING_CONTENT;
+  if(serviceSelect&&quoteCatalog){
+    const placeholder=serviceSelect.options[0]?.cloneNode(true);
+    const additional=Array.from(serviceSelect.options).slice(1).map(option=>option.cloneNode(true));
+    serviceSelect.replaceChildren();
+    if(placeholder)serviceSelect.appendChild(placeholder);
+    quoteCatalog.services.forEach(service=>{const option=document.createElement('option');option.value=service.inquiryService;option.textContent=service.name;serviceSelect.appendChild(option)});
+    additional.forEach(option=>serviceSelect.appendChild(option));
+  }
+  window.dsOpenQuoteModal=function(serviceValue,planName){
+    if(!modal)return;
+    lastFocus=document.activeElement;
+    window.dsHideChristmasPromo?.();
+    if(serviceValue&&serviceSelect)serviceSelect.value=serviceValue;
+    const selectedService=serviceValue||(serviceSelect?.value||'');
+    if(planInput)planInput.value=planName||'';
+    if(selectionSummary){
+      if(selectedService||planName){
+        const selectedLabel=serviceSelect?.selectedOptions[0]?.textContent||selectedService;
+        selectionSummary.textContent='Enquiry focus: '+selectedLabel+(planName?' · '+planName:'');
+        selectionSummary.hidden=false;
+      }else{
+        selectionSummary.textContent='';
+        selectionSummary.hidden=true;
+      }
+    }
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+    const video=modal.querySelector('video');
+    if(video){if(!video.hasAttribute('src')){video.src=video.dataset.src;video.load()}video.play?.().catch(()=>{})}
+    setTimeout(()=>document.getElementById('ds-q-name')?.focus(),80)
+  };
   window.dsCloseQuoteModal=function(){if(!modal)return;modal.querySelector('video')?.pause?.();lastFocus?.focus?.();modal.classList.remove('is-open');modal.setAttribute('aria-hidden','true');document.body.style.overflow='';window.dsScheduleChristmasPromo?.(650)};
-  window.dsSubmitQuote=function(event){event.preventDefault();const form=event.currentTarget;if(!form.reportValidity())return;const data=new FormData(form);const fields=[['Name',data.get('name')],['Phone',data.get('phone')],['Business',data.get('business')||'Not provided'],['Service',data.get('service')],['Approx. monthly budget',data.get('budget')],['City',data.get('city')||'Not provided'],['Requirement',data.get('message')||'Would like to discuss service options and pricing']];const message='Hello Digi Shatakshi! I would like to get a tailored service quote.\n\n'+fields.map(([k,v])=>k+': '+String(v).trim()).join('\n')+'\n\nPlease share the suitable service options and pricing.';const url='https://wa.me/917310251337?text='+encodeURIComponent(message);const opened=window.open(url,'_blank','noopener,noreferrer');if(!opened)window.location.href=url;};
+  window.dsSubmitQuote=function(event){
+    event.preventDefault();
+    const form=event.currentTarget;
+    if(!form.reportValidity())return;
+    const data=new FormData(form);
+    const fields=[['Name',data.get('name')],['Phone',data.get('phone')],['Business',data.get('business')||'Not provided'],['Service',data.get('service')]];
+    if(data.get('plan'))fields.push(['Plan',data.get('plan')]);
+    fields.push(['Approx. monthly budget',data.get('budget')],['City',data.get('city')||'Not provided'],['Requirement',data.get('message')||'Would like to discuss service options and pricing']);
+    const message='Hello Digi Shatakshi! I would like to get a tailored service quote.\n\n'+fields.map(([k,v])=>k+': '+String(v).trim()).join('\n')+'\n\nPlease share the suitable service options and pricing.';
+    const url='https://wa.me/917310251337?text='+encodeURIComponent(message);
+    const opened=window.open(url,'_blank','noopener,noreferrer');
+    if(!opened)window.location.href=url;
+  };
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal?.classList.contains('is-open'))window.dsCloseQuoteModal()});
 })();</script>
 
-  <!-- Character-led, rule-based website assistant; no external LLM/API required -->
   <section id="ds-advisor" class="ds-advisor" aria-label="Digi Shatakshi virtual advisor">
     <button id="ds-advisor-launcher" class="ds-advisor-launcher" type="button" aria-expanded="false" aria-controls="ds-advisor-panel">
-      <span class="ds-avatar ds-avatar-small" aria-hidden="true"><span class="ds-avatar-hair"></span><span class="ds-avatar-face"><i></i><b></b></span><span class="ds-avatar-body"></span></span>
-      <span class="ds-launcher-label"><strong>Digi Saathi</strong><small>Your growth advisor</small></span><span class="ds-launcher-dot"></span>
+      <span class="ds-chat-avatar"><img src="/assets/favicon.svg" alt="" width="32" height="32"></span>
+      <span class="ds-launcher-label"><strong>DigiSaathi</strong><small>Chat with us</small></span>
+      <svg class="ds-launcher-arrow" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11.5a7 7 0 1 1 3.5 6L5 19l.8-3.7A7 7 0 0 1 5 11.5Z"/><path d="M9 11.5h6m-6 3h3"/></svg>
     </button>
-    <div id="ds-advisor-panel" class="ds-advisor-panel" aria-hidden="true">
+    <div id="ds-advisor-panel" class="ds-advisor-panel" role="dialog" aria-labelledby="ds-chat-name" hidden>
       <header class="ds-chat-header">
-        <span class="ds-avatar ds-avatar-chat" aria-hidden="true"><span class="ds-avatar-hair"></span><span class="ds-avatar-face"><i></i><b></b></span><span class="ds-avatar-body"></span></span>
-        <div class="ds-chat-agent"><strong>Digi Saathi <span>✦</span></strong><small><i></i> Digi Shatakshi · Online assistant</small></div>
-        <button id="ds-advisor-close" type="button" aria-label="Close chat">×</button>
+        <span class="ds-chat-avatar"><img src="/assets/favicon.svg" alt="" width="34" height="34"></span>
+        <div class="ds-chat-agent"><strong id="ds-chat-name">DigiSaathi</strong><small><i aria-hidden="true"></i> Digi Shatakshi virtual assistant</small></div>
+        <button id="ds-advisor-close" type="button" aria-label="Close chat"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
       </header>
-      <div class="ds-chat-welcome"><span class="ds-chat-time">JUST NOW</span><p>Hi! I’m Digi Saathi, your digital growth guide. I can help with our services, packages, and enquiries. What are you looking for?</p><button id="ds-chat-welcome-more" class="ds-chat-know-more" type="button">Know more</button></div>
-      <div id="ds-chat-messages" class="ds-chat-messages" aria-live="polite"></div>
-      <div class="ds-chat-quick" id="ds-chat-quick">
-        <button type="button" data-chat="free demo">Book free demo</button>
-        <button type="button" data-chat="know your seo">Know your SEO</button>
-        <button type="button" data-chat="pricing">Service charges</button>
-        <button type="button" data-chat="talk to advisor">Talk to an advisor</button>
+      <div class="ds-chat-scroll" id="ds-chat-scroll">
+        <div class="ds-chat-intro">
+          <div class="ds-chat-intro-copy"><strong>English · हिन्दी · Hinglish</strong><p>Ask a question or choose a service.</p></div>
+          <svg class="ds-chat-intro-graphic" viewBox="0 0 158 84" fill="none" aria-hidden="true">
+            <ellipse cx="88" cy="42" rx="67" ry="25" transform="rotate(-22 88 42)" stroke="#7ccfb2" stroke-opacity=".45"/>
+            <ellipse cx="88" cy="42" rx="60" ry="24" transform="rotate(21 88 42)" stroke="#bec8fe" stroke-opacity=".35"/>
+            <rect x="67" y="18" width="54" height="47" rx="13" fill="#253e53" stroke="#98dbc2" stroke-opacity=".55"/>
+            <path d="M80 34h27m-27 8h20m-20 8h12" stroke="#b0e7d3" stroke-width="2" stroke-linecap="round"/>
+            <path d="m48 17 3 7 7 3-7 3-3 7-3-7-7-3 7-3 3-7Z" fill="#edc779"/>
+            <circle cx="136" cy="53" r="4" fill="#b0e7d3"/><circle cx="31" cy="58" r="3" fill="#a4affe"/>
+            <path d="M131 15v10m-5-5h10M48 57v8m-4-4h8" stroke="#c7d1ff" stroke-linecap="round" stroke-opacity=".75"/>
+          </svg>
+        </div>
+        <div id="ds-chat-messages" class="ds-chat-messages" role="log" aria-label="Conversation" aria-live="polite" aria-relevant="additions"></div>
+        <div id="ds-chat-typing" class="ds-chat-typing" hidden>
+          <span class="ds-chat-typing-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="ds-chat-typing-label" id="ds-chat-typing-label" role="status"></span>
+        </div>
       </div>
-      <form id="ds-chat-form" class="ds-chat-form">
-        <input id="ds-chat-input" type="text" autocomplete="off" maxlength="240" placeholder="Ask about services, packages, or offers…" aria-label="Type your message">
-        <button type="submit" aria-label="Send message"><svg viewBox="0 0 24 24" fill="none"><path d="m4 4 16 8-16 8 3-8-3-8Zm3 8h13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      </form>
-      <div class="ds-chat-disclaimer">Answers based on our website · Our team confirms custom details</div>
+      <div class="ds-chat-footer">
+        <div class="ds-chat-shortcuts">
+          <div class="ds-chat-shortcuts-title" id="ds-chat-shortcuts-title">Explore our services</div>
+          <div class="ds-chat-quick" id="ds-chat-quick" role="group" aria-labelledby="ds-chat-shortcuts-title">
+            <button type="button" data-chat="website"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3M3 8h18"/></svg><span>Websites</span></button>
+            <button type="button" data-chat="social"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="12" cy="12" r="3.2"/><path d="M16.5 7.5h.01"/></svg><span>Social media</span></button>
+            <button type="button" data-chat="seo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="5.5"/><path d="m15 15 5 5m-12-9 2-2 2 2 2-3"/></svg><span>SEO</span></button>
+            <button type="button" data-chat="ads"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4l12 4V6L4 10Zm12-4 3-2v16l-3-2M6 15l2 5h3l-2-4m12-6v4"/></svg><span>Paid ads</span></button>
+            <button type="button" data-chat="branding"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3Z"/></svg><span>Branding</span></button>
+            <button type="button" data-chat="content"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="16" rx="2"/><path d="M8 8h8m-8 4h8m-8 4h4"/></svg><span>Content</span></button>
+            <button type="button" data-chat="automation"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m13 3-8 11h6l-1 7 9-11h-7l1-7Z"/></svg><span>Automation</span></button>
+            <button type="button" data-chat="leads"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16l-6 7v6l-4 2v-8L4 5Z"/></svg><span>Lead generation</span></button>
+          </div>
+        </div>
+        <form id="ds-chat-form" class="ds-chat-form">
+          <input id="ds-chat-input" type="text" autocomplete="off" enterkeyhint="send" maxlength="500" placeholder="Type your question…" aria-label="Type your message">
+          <button type="submit" aria-label="Send message"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 4 16 8-16 8 3-8-3-8Zm3 8h13"/></svg></button>
+        </form>
+        <div class="ds-chat-note">Our team confirms custom quotes and project details.</div>
+      </div>
     </div>
     <aside id="ds-christmas-promo" class="ds-christmas-promo" aria-label="Christmas growth offer" aria-hidden="true">
       <button class="ds-promo-close" type="button" aria-label="Dismiss Christmas offer">×</button>
@@ -6774,33 +6790,9 @@ const CrystalizedBall = ({
     .ds-promo-primary{min-height:35px;padding:0 12px;border:1px solid rgba(255,235,191,.3);border-radius:10px;background:linear-gradient(110deg,#f1c96e,#e9a94f);color:#25231b;font:800 10px 'DM Sans',sans-serif;box-shadow:0 7px 18px rgba(218,169,91,.2);transition:transform .2s ease,filter .2s ease}
     .ds-promo-primary:hover{transform:translateY(-2px);filter:brightness(1.06)}
     .ds-promo-copy small{display:block;margin-top:7px;color:#aabbb0;font:400 9px 'DM Sans',sans-serif}
-    #ds-advisor-launcher{position:relative;z-index:1}
-
-    #ds-advisor{position:fixed;right:26px;bottom:25px;z-index:9800;font-family:'DM Sans',sans-serif}
-    .ds-advisor-launcher{display:flex;align-items:center;gap:10px;padding:8px 15px 8px 8px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:linear-gradient(120deg,#263e4d,#172936);color:#f8f6ef;box-shadow:0 15px 42px rgba(2,10,18,.32);transition:transform .25s ease,box-shadow .25s ease}
-    .ds-advisor-launcher:hover{transform:translateY(-3px);box-shadow:0 20px 50px rgba(2,10,18,.4)}
-    .ds-launcher-label{display:grid;text-align:left;line-height:1.25}.ds-launcher-label strong{font-size:12px}.ds-launcher-label small{margin-top:2px;color:#b8c7ce;font-size:9px}.ds-launcher-dot{width:8px;height:8px;margin-left:2px;border-radius:50%;background:#4bd2a5;box-shadow:0 0 0 4px rgba(75,210,165,.12)}
-    .ds-avatar{position:relative;display:block;flex:0 0 auto;overflow:hidden;border-radius:50%;background:radial-gradient(circle at 50% 30%,#f6d8c4 0 23%,#d69c85 24% 40%,#314b5b 41% 100%);border:2px solid rgba(255,255,255,.7);box-shadow:0 4px 15px rgba(0,0,0,.2)}
-    .ds-avatar-small{width:43px;height:43px}.ds-avatar-chat{width:44px;height:44px}
-    .ds-avatar-hair{position:absolute;z-index:2;left:17%;top:5%;width:66%;height:55%;border-radius:48% 48% 38% 38%;background:linear-gradient(110deg,#342536,#6a3e42 55%,#2b2535);clip-path:polygon(8% 0,90% 0,100% 100%,79% 80%,72% 43%,30% 43%,20% 84%,0 100%)}
-    .ds-avatar-face{position:absolute;z-index:3;left:29%;top:28%;width:42%;height:43%;border-radius:44% 44% 48% 48%;background:linear-gradient(120deg,#f3c9ad,#d99e86)}
-    .ds-avatar-face:before,.ds-avatar-face:after{content:"";position:absolute;top:44%;width:3px;height:3px;border-radius:50%;background:#392b32}.ds-avatar-face:before{left:23%}.ds-avatar-face:after{right:23%}
-    .ds-avatar-face i{position:absolute;left:40%;bottom:20%;width:22%;height:5px;border-bottom:1.5px solid #9b4e59;border-radius:50%}
-    .ds-avatar-face b{position:absolute;left:-8%;top:15%;width:116%;height:3px;border-radius:50%;background:rgba(87,45,49,.55)}
-    .ds-avatar-body{position:absolute;left:21%;bottom:-28%;width:58%;height:55%;border-radius:45% 45% 0 0;background:linear-gradient(90deg,#d6b66f,#f1d99a,#b28c4b)}
-    .ds-advisor-panel{position:absolute;right:0;bottom:70px;width:min(370px,calc(100vw - 28px));height:min(570px,calc(100dvh - 115px));display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(255,255,255,.17);border-radius:25px;background:#f7f8f6;color:#1b3040;box-shadow:0 28px 90px rgba(2,10,18,.42);opacity:0;visibility:hidden;transform:translateY(12px) scale(.985);transform-origin:bottom right;transition:opacity .25s ease,transform .28s ease,visibility .25s}
-    #ds-advisor.is-open .ds-advisor-panel{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
-    .ds-chat-header{display:flex;align-items:center;gap:11px;padding:14px 15px;background:linear-gradient(115deg,#243d4d,#1a2d3b);color:#fff}
-    .ds-chat-agent{display:grid;gap:3px;flex:1}.ds-chat-agent strong{font:800 14px Manrope,sans-serif}.ds-chat-agent strong span{color:#e9bd69}.ds-chat-agent small{color:#c0d0d7;font-size:9px}.ds-chat-agent small i{display:inline-block;width:6px;height:6px;margin-right:4px;border-radius:50%;background:#4bd2a5}.ds-chat-header>button{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.1);color:#fff;font-size:21px}
-    .ds-chat-welcome{padding:12px 14px 7px;background:linear-gradient(135deg,#edf4f1,#f6f1e9)}.ds-chat-time{color:#82939b;font-size:8px;font-weight:800;letter-spacing:.13em}.ds-chat-welcome p{max-width:290px;margin:5px 0 7px;padding:10px 12px;border:1px solid #dce7e2;border-radius:4px 14px 14px 14px;background:#fff;color:#31495a;font-size:11px;line-height:1.55}
-    .ds-chat-messages{flex:1;overflow:auto;padding:10px 13px 5px;background:linear-gradient(180deg,#f6f8f6,#f1f4f2)}.ds-chat-message{width:fit-content;max-width:88%;margin:0 0 9px;padding:10px 12px;border:1px solid #dfe8e3;border-radius:4px 13px 13px 13px;background:#fff;color:#304657;font-size:11px;line-height:1.55;box-shadow:0 3px 10px rgba(30,55,65,.04);white-space:pre-line}.ds-chat-message.is-user{margin-left:auto;border-color:#b9e4dc;border-radius:13px 4px 13px 13px;background:#dff3ed;color:#1d4a48}
-    .ds-chat-know-more{display:inline-flex;align-items:center;gap:5px;margin-top:8px;padding:6px 11px;border:1px solid rgba(31,113,102,.2);border-radius:999px;background:linear-gradient(120deg,#c8f0e5,#f2dfad);color:#163d46;font-size:10px;font-weight:800;line-height:1.2;cursor:pointer;transition:transform .18s ease,filter .18s ease}.ds-chat-know-more:hover{transform:translateY(-1px);filter:brightness(1.03)}.ds-chat-know-more:focus-visible{outline:2px solid #218e7b;outline-offset:2px}
-    .ds-chat-quick{display:flex;flex-wrap:wrap;gap:6px;padding:8px 12px;background:#f1f4f2}.ds-chat-quick button{padding:7px 9px;border:1px solid #cbdcd7;border-radius:999px;background:#fff;color:#24675f;font-size:9px;font-weight:700}.ds-chat-quick button:hover{border-color:#43bca9;background:#e9f7f3}
-    .ds-chat-form{display:flex;gap:8px;padding:10px 12px;border-top:1px solid #e0e8e4;background:#fff}.ds-chat-form input{flex:1;min-width:0;height:39px;padding:0 12px;border:1px solid #d7e1dc;border-radius:12px;outline:none;background:#fff;color:#203747;color-scheme:light;caret-color:#0f766e;font-size:11px}.ds-chat-form input::placeholder{color:#718096;opacity:1}.ds-chat-form input:focus{border-color:#43bca9;box-shadow:0 0 0 3px rgba(67,198,180,.13)}.ds-chat-form button{display:grid;place-items:center;width:40px;height:39px;border-radius:12px;background:linear-gradient(120deg,#43c6b4,#9adfd0);color:#143743}.ds-chat-form svg{width:18px;height:18px}.ds-chat-disclaimer{padding:0 12px 9px;background:#fff;color:#87969b;text-align:center;font-size:8px}
-    html.light .ds-advisor-launcher{background:linear-gradient(120deg,#fff,#edf5f1);color:#1c3444;border-color:rgba(31,53,69,.16);box-shadow:0 14px 35px rgba(31,53,69,.16)}html.light .ds-launcher-label small{color:#687d88}
-    @media(max-width:640px){#ds-christmas-promo{right:12px;bottom:143px;width:min(410px,calc(100vw - 40px));grid-template-columns:96px 1fr;gap:10px;padding:12px;border-radius:19px}.ds-promo-art{min-height:112px}.ds-promo-scene{min-height:112px}.ds-promo-copy h2{font-size:17px}.ds-promo-copy p{font-size:10px}.ds-promo-primary{min-height:33px;padding:0 9px;font-size:9px}#ds-advisor{right:12px;bottom:82px}.ds-advisor-panel{bottom:62px;height:min(560px,calc(100dvh - 155px))}.ds-advisor-launcher{padding:6px 11px 6px 6px}.ds-avatar-small{width:39px;height:39px}}
+    @media(max-width:640px){#ds-christmas-promo{right:12px;bottom:143px;width:min(410px,calc(100vw - 40px));grid-template-columns:96px 1fr;gap:10px;padding:12px;border-radius:19px}.ds-promo-art{min-height:112px}.ds-promo-scene{min-height:112px}.ds-promo-copy h2{font-size:17px}.ds-promo-copy p{font-size:10px}.ds-promo-primary{min-height:33px;padding:0 9px;font-size:9px}}
     @media(max-width:380px){#ds-christmas-promo{grid-template-columns:78px 1fr;gap:8px;padding:10px}.ds-promo-copy h2{font-size:15px}.ds-promo-kicker{font-size:8px}.ds-promo-art,.ds-promo-scene{min-height:102px}}
-    @media(prefers-reduced-motion:reduce){#ds-main-header,.ds-advisor-panel,#ds-christmas-promo,.ds-advisor-launcher{transition:none}.ds-promo-santa,.ds-promo-bell,.ds-promo-snow{animation:none}}
+    @media(prefers-reduced-motion:reduce){#ds-main-header,#ds-christmas-promo{transition:none}.ds-promo-santa,.ds-promo-bell,.ds-promo-snow{animation:none}}
 
     /* Connect With Us social profile section */
     .ds-social-section { background: radial-gradient(ellipse at 15% 45%, rgba(29,78,216,.13), transparent 38%), radial-gradient(ellipse at 85% 55%, rgba(198,163,106,.10), transparent 36%), rgba(12,16,24,.72); }
@@ -7459,135 +7451,11 @@ html.light #app-root .pricing-plan-card:hover {
       // Premium enquiry modal: show once per session, with a video-led layout.
       window.setTimeout(()=>{
         if(sessionStorage.getItem('ds-enquiry-seen')==='1') return;
-        if(document.querySelector('.modal:not(.hidden), #blog-modal.is-open')) return;
+        if(document.querySelector('.modal:not(.hidden), #blog-modal.is-open, #ds-quote-modal.is-open, #ds-advisor.is-open')) return;
         window.dsOpenQuoteModal?.();
         sessionStorage.setItem('ds-enquiry-seen','1');
       },12000);
 
-      const advisor=document.getElementById('ds-advisor');
-      const launcher=document.getElementById('ds-advisor-launcher');
-      const panel=document.getElementById('ds-advisor-panel');
-      const messages=document.getElementById('ds-chat-messages');
-      const input=document.getElementById('ds-chat-input');
-      const promo=document.getElementById('ds-christmas-promo');
-      let promoTimer=0;
-      const hidePromo=()=>{window.clearTimeout(promoTimer);promoTimer=0;promo?.classList.remove('is-visible');promo?.setAttribute('aria-hidden','true')};
-      const schedulePromo=(delay=8500,force=false)=>{window.clearTimeout(promoTimer);if(!force&&sessionStorage.getItem('ds-christmas-promo-seen')==='1')return;promoTimer=window.setTimeout(()=>{promoTimer=0;if(!promo||advisor?.classList.contains('is-open')||document.querySelector('#ds-quote-modal.is-open,.modal:not(.hidden),#blog-modal.is-open'))return;promo.classList.add('is-visible');promo.setAttribute('aria-hidden','false');sessionStorage.setItem('ds-christmas-promo-seen','1')},delay)};
-      window.dsHideChristmasPromo=hidePromo;
-      window.dsScheduleChristmasPromo=schedulePromo;
-      const openChat=()=>{hidePromo();advisor?.classList.add('is-open');launcher?.setAttribute('aria-expanded','true');panel?.setAttribute('aria-hidden','false');setTimeout(()=>input?.focus(),100)};
-      const closeChat=()=>{advisor?.classList.remove('is-open');launcher?.setAttribute('aria-expanded','false');panel?.setAttribute('aria-hidden','true');schedulePromo(900,true)};
-      const serviceNames={website:'Website & Landing Pages',smm:'Social Media Marketing',seo:'Search Engine Optimization (SEO)',ads:'Paid Advertising (Google / Meta Ads)'};
-      const normalizeQuestion=value=>String(value||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').replace(/\s+/g,' ').trim();
-      const hasAny=(value,terms)=>terms.some(term=>value.includes(term));
-      const categoryKeysFor=value=>{
-        const keys=[];
-        if(hasAny(value,['website','web site','web design','web development','landing page','ecommerce','e commerce','online store']))keys.push('website');
-        if(hasAny(value,['seo','search engine','google ranking','rank on google','keyword ranking']))keys.push('seo');
-        const socialAds=hasAny(value,['facebook ads','instagram ads']);
-        if(hasAny(value,['smm','social media','instagram','facebook page'])&&!socialAds)keys.push('smm');
-        if(hasAny(value,['google ads','meta ads','facebook ads','instagram ads','paid ad','paid advertising','advertising','ad spend','ad budget','campaign management']))keys.push('ads');
-        return keys;
-      };
-      const planAliases={website:[['landing'],['business'],['ecommerce','e commerce','online store']],smm:[['basic'],['moderate'],['premium']],seo:[['local'],['growth'],['advanced']],ads:[['meta','facebook'],['google'],['multichannel','multi channel']]};
-      const findPlan=(key,value)=>{
-        const plans=PRICING_CATEGORIES[key]?.plans||[];
-        return plans.find((plan,index)=>{
-          const name=normalizeQuestion(plan.name);
-          return (name&&value.includes(name))||(planAliases[key]?.[index]||[]).some(alias=>value.includes(alias));
-        });
-      };
-      const findAnyPlan=value=>{
-        for(const key of ['website','smm','seo','ads']){
-          const plan=findPlan(key,value);
-          if(plan)return {key,plan};
-        }
-        return null;
-      };
-      const billingFor=key=>key==='website'?'one-time project fee':key==='ads'?'monthly management fee':'per month';
-      const planDetails=(key,plan)=>{
-        const details=(plan.deliverables||[]).map(([label,quantity])=>`${label}: ${quantity}`).join('; ');
-        const features=(plan.features||[]).join('; ');
-        const note=key==='ads'?'Advertising spend is paid separately to Google/Meta and is not included.':key==='seo'?'SEO outcomes depend on competition, website condition and implementation; rankings cannot be guaranteed.':'';
-        return `${plan.name} is ${plan.price} ${billingFor(key)}.${plan.description?` ${plan.description}`:''}${details?`\nDeliverables: ${details}.`:''}${features?`\nAlso included: ${features}.`:''}${note?`\n${note}`:''}`;
-      };
-      const categorySummary=key=>{
-        const category=PRICING_CATEGORIES[key];
-        const plans=category.plans||[];
-        const lines=plans.map(plan=>{
-          const cost=`${plan.price} ${billingFor(key)}`;
-          if(key==='smm'){
-            const deliverables=(plan.deliverables||[]).map(([label,quantity])=>`${label}: ${quantity}`).join(', ');
-            return `${plan.name} — ${cost}; ${deliverables}.`;
-          }
-          const features=(plan.features||[]).slice(0,2).join(', ');
-          return `${plan.name} — ${cost}${features?`; includes ${features}`:''}.`;
-        });
-        const note=key==='ads'?' Ad spend is separate from the management fee.':key==='website'?' Domain, hosting and certain third-party costs may be additional.':key==='seo'?' SEO outcomes depend on your site and competition; rankings are not guaranteed.':'';
-        return `${category.label} options from our website:\n${lines.join('\n')}${note}\nTell me your main goal and I can help narrow down which option to ask about.`;
-      };
-      const startingPrices=()=>Object.keys(PRICING_CATEGORIES).map(key=>{
-        const category=PRICING_CATEGORIES[key];
-        return `${category.label}: from ${category.plans[0].price} ${billingFor(key)}`;
-      }).join('\n');
-      const openEnquiry=question=>{
-        closeChat();
-        const keys=categoryKeysFor(normalizeQuestion(question));
-        const service=document.getElementById('ds-q-service');
-        if(keys.length&&service)service.value=serviceNames[keys[0]];
-        const requirements=document.getElementById('ds-q-message');
-        if(question&&requirements&&!requirements.value.trim())requirements.value=`Digi Saathi enquiry: ${question}`;
-        window.dsOpenQuoteModal?.();
-      };
-      const addMessage=(text,user=false,question='')=>{
-        const el=document.createElement('div');
-        el.className='ds-chat-message'+(user?' is-user':'');
-        el.textContent=text;
-        if(!user){
-          const more=document.createElement('button');
-          more.type='button';
-          more.className='ds-chat-know-more';
-          more.textContent='Know more';
-          more.setAttribute('aria-label','Open the enquiry form to know more');
-          more.addEventListener('click',()=>openEnquiry(question));
-          el.appendChild(more);
-        }
-        messages?.appendChild(el);
-        if(messages)messages.scrollTop=messages.scrollHeight;
-      };
-      launcher?.addEventListener('click',()=>advisor?.classList.contains('is-open')?closeChat():openChat());
-      document.getElementById('ds-advisor-close')?.addEventListener('click',closeChat);
-      document.getElementById('ds-chat-welcome-more')?.addEventListener('click',()=>openEnquiry(''));
-      const reply=(raw)=>{
-        const q=normalizeQuestion(raw);
-        const priceIntent=hasAny(q,['price','pricing','cost','charge','charges','fee','fees','budget','how much','rate','package','packages','plan','plans','quote','quotation']);
-        const detailIntent=hasAny(q,['include','includes','included','deliverable','deliverables','feature','features','posts','reels','stories','what do i get','scope']);
-        if(hasAny(q,['discount','coupon','concession','special offer','christmas','seasonal','deal','sale'])||(q.includes('offer')&&!hasAny(q,['what do you offer','services do you offer','service do you offer'])))return 'I can help you request a personalized offer. Share your business goals, the service you need and your budget using Know more; our team will review the scope and confirm whether any discount is available. I can’t promise a discount before that review.';
-        if(hasAny(q,['free demo','book demo','demo','consult','advisor','human','talk to','call me']))return 'A free discovery conversation is a good next step. Tell us a little about your business and what you want to achieve, and the team can follow up to discuss suitable options.';
-        if(hasAny(q,['address','location','office','where are you']))return 'Our office is at 2/45, Vibhav Khand, Gomti Nagar, Lucknow, Uttar Pradesh 226010. Use Know more if you would like the team to contact you about a service.';
-        if(hasAny(q,['contact','phone number','whatsapp','call the team']))return 'You can reach the team on WhatsApp at +91 73102 51337, or use Know more to send your service requirements through the enquiry form.';
-        if(hasAny(q,['how do i enquire','how to enquire','enquiry form','inquiry form','send an enquiry','submit an enquiry']))return 'Tap Know more below to open the enquiry form. Add your contact details and requirements, then review and send the prepared message in WhatsApp.';
-        const categories=categoryKeysFor(q);
-        if(categories.length>1&&(priceIntent||detailIntent)){
-          return `You mentioned ${categories.map(key=>PRICING_CATEGORIES[key].label).join(' and ')}. Current starting prices are:\n${categories.map(key=>`${PRICING_CATEGORIES[key].label}: ${PRICING_CATEGORIES[key].plans[0].price} ${billingFor(key)}`).join('\n')}\nTell me which service you want to compare in more detail.`;
-        }
-        const key=categories[0]||null;
-        const match=key?{key,plan:findPlan(key,q)}:findAnyPlan(q);
-        if(match?.plan&&(priceIntent||detailIntent||hasAny(q,['basic','moderate','premium','growth','local','landing','business','ecommerce','multichannel'])))return planDetails(match.key,match.plan);
-        if(key)return categorySummary(key);
-        if(priceIntent)return `Here are the current starting prices listed on our website:\n${startingPrices()}\nPaid advertising budgets are separate from ad-management fees. Tell me which service you’re considering and I can share its package details.`;
-        if(hasAny(q,['what do you do','what services','your services','services','what can you help','help with','what do you offer']))return `We help with websites, social media marketing, SEO and paid ads, along with content, branding, lead generation and marketing automation.\n${startingPrices()}\nWhat are you hoping to improve?`;
-        if(hasAny(q,['thank','thanks','appreciate']))return 'You’re welcome! I’m happy to help you explore the options whenever you’re ready.';
-        if(hasAny(q,['hi','hello','hey','good morning','good afternoon','good evening'])&&q.split(' ').length<=3)return 'Hi! What are you looking to grow: your website, social media, search visibility or enquiries from ads?';
-        return 'I want to give you an accurate answer. Are you asking about social media, SEO, paid ads or a website package? Share your business goal or target city and I’ll guide you using the information on our website.';
-      };
-      const send=(value)=>{const text=String(value||'').trim();if(!text)return;addMessage(text,true);window.setTimeout(()=>addMessage(reply(text),false,text),260)};
-      document.querySelector('.ds-promo-close')?.addEventListener('click',()=>{hidePromo();sessionStorage.setItem('ds-christmas-promo-seen','1')});
-      promo?.querySelector('.ds-promo-primary')?.addEventListener('click',()=>{sessionStorage.setItem('ds-christmas-promo-seen','1');hidePromo();openChat();window.setTimeout(()=>send('Christmas offer'),180)});
-      document.getElementById('ds-chat-form')?.addEventListener('submit',e=>{e.preventDefault();send(input?.value);if(input)input.value=''});
-      document.getElementById('ds-chat-quick')?.addEventListener('click',e=>{const b=e.target.closest('button[data-chat]');if(!b)return;send(b.textContent)});
-      document.addEventListener('keydown',e=>{if(e.key==='Escape'&&advisor?.classList.contains('is-open'))closeChat()});
-      schedulePromo();
     })();
   </script>
 
@@ -7598,5 +7466,7 @@ html.light #app-root .pricing-plan-card:hover {
     if (heroVideo) { heroVideo.pause(); heroVideo.removeAttribute('autoplay'); }
   }
 </script>
+  <script src="/digisaathi-answers.js" defer></script>
+  <script src="/digisaathi-chat.js" defer></script>
 </body>
 </html>
