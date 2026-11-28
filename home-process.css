@@ -1,59 +1,47 @@
 #our-process {
-  --process-ink: #f3eef9;
-  --process-muted: #c3c5d9;
-  --process-gold: #efd094;
-  --process-surface: #21263b;
-  --process-border: #434a68;
-  --process-art-bg: #1a2032;
-  --process-grid: #333b53;
-  padding-block: clamp(4rem, 9vw, 8rem);
-  border-block-start: 1px solid rgba(167, 166, 223, .18);
-  background: #171b2c;
+  --process-ink: var(--ed-ink, #f2eee4);
+  --process-muted: var(--ed-muted, #adb8b6);
+  --process-gold: var(--ed-warm, #e4bb84);
+  --process-surface: var(--ed-surface, #161e22);
+  --process-border: var(--ed-line, #344146);
+  --process-art-bg: var(--ed-panel, #1d282c);
+  --process-accent: var(--ed-accent, #b9d2b9);
+  --process-grid: color-mix(in srgb, var(--process-border) 53%, transparent);
+  --ds-swap-top: 94px;
+  padding-block: clamp(4rem, 7vw, 7.25rem);
+  border-block-start: 1px solid var(--process-border);
+  background: var(--ed-bg, #101619);
   color: var(--process-ink);
-  scroll-margin-top: 86px;
-}
-
-html.light #our-process {
-  --process-ink: #21263d;
-  --process-muted: #48546c;
-  --process-gold: #805e25;
-  --process-surface: #faf9fd;
-  --process-border: #c8cede;
-  --process-art-bg: #eceff8;
-  --process-grid: #d8deef;
-  border-block-start-color: var(--process-border);
-  background: #f0f1f8;
+  scroll-margin-top: var(--ds-swap-top);
 }
 
 .ds-process-layout {
   display: grid;
-  width: min(calc(100% - clamp(2rem, 7vw, 7rem)), 77rem);
+  width: min(calc(100% - 2 * var(--ed-gutter, clamp(18px, 4vw, 60px))), var(--ed-max, 1220px));
   margin-inline: auto;
-  grid-template-columns: minmax(0, .7fr) minmax(0, 1.8fr);
+  grid-template-columns: minmax(0, .85fr) minmax(0, 1.8fr);
   align-items: start;
-  gap: clamp(2rem, 6vw, 6rem);
+  gap: clamp(2rem, 7vw, 6rem);
 }
 
 .ds-process-heading {
-  position: sticky;
-  top: 112px;
   align-self: start;
-  padding-block: .4rem 1.5rem;
+  padding-block: .4rem;
 }
 
 .ds-process-eyebrow {
   color: var(--process-gold);
   font-size: .75rem;
   font-weight: 800;
-  letter-spacing: .16em;
+  letter-spacing: .12em;
   text-transform: uppercase;
 }
 
 #our-process .ds-process-heading h2 {
   margin: .55rem 0 1rem;
   color: var(--process-ink);
-  font: 800 clamp(2.6rem, 4.6vw, 4.7rem)/.98 var(--font-heading, Manrope, sans-serif);
-  letter-spacing: -.066em;
+  font: 780 clamp(2.6rem, 4.6vw, 4.7rem)/1.01 var(--font-heading, Manrope, sans-serif);
+  letter-spacing: -.045em;
   text-wrap: balance;
 }
 
@@ -104,63 +92,86 @@ html.light #our-process {
   flex-direction: column;
   gap: 1.25rem;
   margin: 0;
-  padding: 0 0 2rem;
+  padding: 0;
   list-style: none;
 }
 
 .ds-process-card {
-  --process-accent: #edcc91;
-  --process-art-ink: #e8d6aa;
-  position: sticky;
-  top: var(--stack-top, 112px);
-  z-index: var(--stack-z, 20);
-  transform: translateY(16px) scale(.99);
-  transform-origin: center top;
-  opacity: 0;
-  transition: opacity .36s ease, transform .45s cubic-bezier(.2, .7, .2, 1);
+  position: relative;
+  min-width: 0;
 }
 
-.ds-process-card.is-visible {
-  transform: none;
-  opacity: 1;
+.ds-process-controls[hidden] {
+  display: none;
 }
 
-.ds-process-card:nth-child(2) { --process-accent: #9cd2f1; --process-art-ink: #acd1ed; }
-.ds-process-card:nth-child(3) { --process-accent: #cbbbf9; --process-art-ink: #cec3f8; }
-.ds-process-card:nth-child(4) { --process-accent: #9ce0c6; --process-art-ink: #a0dfc9; }
-.ds-process-card:nth-child(5) { --process-accent: #f2bcad; --process-art-ink: #f3c0b2; }
-.ds-process-card:nth-child(6) { --process-accent: #c5dc9c; --process-art-ink: #cae2a9; }
+.ds-process-controls {
+  margin-block-start: 1.25rem;
+}
 
-html.light .ds-process-card { --process-accent: #78561f; --process-art-ink: #816232; }
-html.light .ds-process-card:nth-child(2) { --process-accent: #22608b; --process-art-ink: #2d6b98; }
-html.light .ds-process-card:nth-child(3) { --process-accent: #684c9d; --process-art-ink: #6e53a3; }
-html.light .ds-process-card:nth-child(4) { --process-accent: #235e54; --process-art-ink: #327467; }
-html.light .ds-process-card:nth-child(5) { --process-accent: #8a4133; --process-art-ink: #904839; }
-html.light .ds-process-card:nth-child(6) { --process-accent: #466331; --process-art-ink: #4e7037; }
+.ds-process-current {
+  display: block;
+  color: var(--process-muted);
+  font-size: .75rem;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .04em;
+}
+
+.ds-process-pagination {
+  display: flex;
+  gap: 5px;
+}
+
+.ds-process-page {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+  min-height: 44px;
+  place-items: center;
+  padding: 0 3px;
+  border-radius: 3px;
+}
+
+.ds-process-page::before {
+  width: 100%;
+  height: 2px;
+  background: var(--process-border);
+  content: "";
+}
+
+.ds-process-page:hover::before,
+.ds-process-page[aria-current="step"]::before {
+  background: var(--process-accent);
+}
+
+.ds-process-page[aria-current="step"]::before {
+  height: 3px;
+}
+
+.ds-process-page:focus-visible {
+  outline: 1px solid var(--process-accent);
+  outline-offset: 2px;
+}
 
 .ds-process-card-layout {
   position: relative;
   display: grid;
+  box-sizing: border-box;
   min-height: 17rem;
   grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
   align-items: center;
   gap: clamp(1.25rem, 3vw, 2.7rem);
   padding: clamp(1.35rem, 3.6vw, 2.9rem);
   border: 1px solid var(--process-border);
-  border-block-start: 2px solid var(--process-accent);
-  border-radius: 1.35rem;
+  border-radius: .75rem;
   background: var(--process-surface);
-  box-shadow: 0 18px 50px #070a1b55;
-  transition: border-color .2s ease;
-}
-
-html.light .ds-process-card-layout {
-  box-shadow: 0 16px 45px #2e385b1a;
+  transform-origin: center top;
 }
 
 .ds-process-step {
   display: inline-block;
-  color: var(--process-accent);
+  color: var(--process-gold);
   line-height: 1.4;
 }
 
@@ -172,8 +183,8 @@ html.light .ds-process-card-layout {
 #our-process .ds-process-card-copy h3 {
   margin: .62rem 0 .65rem;
   color: var(--process-ink);
-  font: 800 clamp(1.55rem, 3vw, 2.75rem)/1.04 var(--font-heading, Manrope, sans-serif);
-  letter-spacing: -.052em;
+  font: 760 clamp(1.55rem, 3vw, 2.65rem)/1.08 var(--font-heading, Manrope, sans-serif);
+  letter-spacing: -.04em;
   text-wrap: balance;
 }
 
@@ -212,14 +223,14 @@ html.light .ds-process-card-layout {
   place-items: center;
   overflow: hidden;
   border: 1px solid var(--process-border);
-  border-radius: .9rem;
+  border-radius: .5rem;
   background-color: var(--process-art-bg);
   background-image:
     linear-gradient(to right, var(--process-grid) 1px, transparent 1px),
     linear-gradient(to bottom, var(--process-grid) 1px, transparent 1px);
   background-position: center;
   background-size: 19px 19px;
-  color: var(--process-art-ink);
+  color: var(--process-accent);
 }
 
 .ds-process-figure {
@@ -325,8 +336,28 @@ html.light .ds-process-card-layout {
 .ds-process-art--improve .ds-process-figure i:nth-child(5) { top: 40%; left: 43%; width: 14%; height: 20%; border-inline-start: 2px solid currentColor; border-block-end: 2px solid currentColor; transform: rotate(-48deg); }
 .ds-process-art--improve .ds-process-figure i:nth-child(6) { inset: 25% 30%; border: 1px dashed currentColor; border-radius: 50%; opacity: .4; }
 
-@media (hover: hover) {
-  .ds-process-card-layout:hover { border-color: var(--process-accent); }
+@media (min-width: 880px) and (min-height: 610px) and (prefers-reduced-motion: no-preference) {
+  #our-process[data-card-swap-active] .ds-process-heading {
+    position: sticky;
+    top: var(--ds-swap-top);
+  }
+
+  #our-process[data-card-swap-active] [data-editorial-stack] {
+    isolation: isolate;
+    gap: clamp(42px, 7vh, 72px);
+    padding-block-end: clamp(28px, 6vh, 64px);
+  }
+
+  #our-process[data-card-swap-active] .ds-process-card {
+    position: sticky;
+    top: var(--ds-swap-top);
+    z-index: var(--ds-swap-order, 1);
+  }
+
+  #our-process[data-card-swap-active] .ds-process-card-layout {
+    min-height: var(--ds-swap-height, 17rem);
+    transform: translateY(var(--ds-swap-recess, 0px)) scale(var(--ds-swap-scale, 1));
+  }
 }
 
 @media (max-width: 960px) {
@@ -367,11 +398,27 @@ html.light .ds-process-card-layout {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .ds-process-card,
-  .ds-process-card-layout {
-    transform: none;
-    opacity: 1;
-    transition: none;
+@media (max-width: 360px) {
+  #our-process .ds-process-card-copy h3 {
+    padding-right: 4.85rem;
   }
+
+  .ds-process-art {
+    width: 4.25rem;
+  }
+}
+
+@media (max-width: 879px) and (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    [data-editorial-stack] .ds-process-card-layout {
+      animation: ds-process-enter linear both;
+      animation-timeline: view();
+      animation-range: entry 3% entry 70%;
+    }
+  }
+}
+
+@keyframes ds-process-enter {
+  from { transform: translateY(12px); opacity: .8; }
+  to { transform: none; opacity: 1; }
 }
