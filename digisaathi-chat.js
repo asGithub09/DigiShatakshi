@@ -16,6 +16,7 @@
   const typing = document.getElementById('ds-chat-typing');
   const typingLabel = document.getElementById('ds-chat-typing-label');
   const promo = document.getElementById('ds-christmas-promo');
+  const promoSeenKey = 'ds-christmas-promo-seen-v2';
   const conversation = answers.createConversation(global.DS_SERVICE_PRICING_CONTENT);
   const pending = [];
   const typingText = {
@@ -27,6 +28,7 @@
   let greeted = false;
   let replying = false;
   let promoTimer;
+  let promoSeen = false;
   let lastQuoteDraft = '';
 
   function scrollToLatest() {
@@ -190,16 +192,18 @@
   }
 
   function hasSeenPromo() {
+    if (promoSeen) return true;
     try {
-      return global.sessionStorage.getItem('ds-christmas-promo-seen') === '1';
+      return global.sessionStorage.getItem(promoSeenKey) === '1';
     } catch {
       return false;
     }
   }
 
   function markPromoSeen() {
+    promoSeen = true;
     try {
-      global.sessionStorage.setItem('ds-christmas-promo-seen', '1');
+      global.sessionStorage.setItem(promoSeenKey, '1');
     } catch {
       // The chat still works when the browser blocks session storage.
     }
@@ -207,17 +211,36 @@
 
   function hidePromo() {
     global.clearTimeout(promoTimer);
-    promo?.classList.remove('is-visible');
-    promo?.setAttribute('aria-hidden', 'true');
+    if (!promo) return;
+    promo.classList.remove('is-visible');
+    promo.setAttribute('aria-hidden', 'true');
+    promo.setAttribute('inert', '');
   }
 
-  function schedulePromo(delay = 8500) {
+  function hasBlockingOverlay() {
+    return !!document.querySelector(
+      '#ds-entry-scene:not(.is-gone), #ds-quote-modal.is-open, #booking-modal:not(.hidden), #blog-modal:not(.hidden), .modal:not(.hidden)'
+    );
+  }
+
+  function dismissPromo(restoreFocus) {
+    markPromoSeen();
+    hidePromo();
+    if (restoreFocus) launcher.focus({ preventScroll: true });
+  }
+
+  function schedulePromo(delay = 5500) {
     global.clearTimeout(promoTimer);
-    if (!promo || hasSeenPromo()) return;
+    if (!promo || hasSeenPromo() || !panel.hidden || document.hidden) return;
     promoTimer = global.setTimeout(() => {
-      if (!panel.hidden || document.querySelector('#ds-quote-modal.is-open, .modal:not(.hidden), #blog-modal.is-open')) return;
-      promo.classList.add('is-visible');
+      if (!panel.hidden || document.hidden || hasSeenPromo()) return;
+      if (hasBlockingOverlay()) {
+        schedulePromo(1500);
+        return;
+      }
+      promo.removeAttribute('inert');
       promo.setAttribute('aria-hidden', 'false');
+      promo.classList.add('is-visible');
       markPromoSeen();
     }, delay);
   }
@@ -233,7 +256,14 @@
     if (button) send(button.querySelector('span').textContent, button.dataset.chat);
   });
   document.addEventListener('keydown', event => {
-    if (event.key === 'Escape' && !panel.hidden) closeChat();
+    if (event.key !== 'Escape') return;
+    if (!panel.hidden) closeChat();
+    else if (promo?.classList.contains('is-visible') && !hasBlockingOverlay()) {
+      dismissPromo(promo.contains(document.activeElement));
+    }
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && !hasSeenPromo()) schedulePromo();
   });
   global.visualViewport?.addEventListener('resize', () => {
     if (panel.hidden) return;
@@ -243,9 +273,7 @@
   global.visualViewport?.addEventListener('scroll', updateViewport);
 
   promo?.querySelector('.ds-promo-close')?.addEventListener('click', () => {
-    markPromoSeen();
-    hidePromo();
-    launcher.focus({ preventScroll: true });
+    dismissPromo(true);
   });
   promo?.querySelector('.ds-promo-primary')?.addEventListener('click', () => {
     markPromoSeen();

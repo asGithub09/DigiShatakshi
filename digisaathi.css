@@ -14,6 +14,8 @@
   --dsch-user-text: #e7fbf5;
   --dsch-action: #255046;
   --dsch-action-hover: #316452;
+  --dsch-launcher-width: 212px;
+  --dsch-projection-origin: 176px;
   position: fixed;
   right: 26px;
   bottom: max(23px, env(safe-area-inset-bottom, 0px));
@@ -54,15 +56,16 @@ html.light #ds-advisor {
 
 .ds-advisor-launcher {
   display: flex;
+  width: var(--dsch-launcher-width);
   align-items: center;
-  gap: 11px;
-  min-height: 57px;
-  padding: 6px 12px 6px 7px;
-  border: 1px solid var(--dsch-line);
-  border-radius: 19px;
-  background: var(--dsch-header);
+  gap: 12px;
+  min-height: 65px;
+  padding: 6px 12px 6px 8px;
+  border: 1px solid color-mix(in srgb, var(--dsch-line) 72%, var(--dsch-accent));
+  border-radius: 22px;
+  background: linear-gradient(118deg, var(--dsch-card), var(--dsch-header));
   color: var(--dsch-text);
-  box-shadow: 0 12px 34px #020a1460;
+  box-shadow: 0 14px 36px #020a1460, inset 0 1px 0 #ffffff0b;
   cursor: pointer;
   transition: border-color .2s, transform .2s;
 }
@@ -73,27 +76,62 @@ html.light #ds-advisor {
 }
 
 .ds-chat-avatar {
+  position: relative;
   display: grid;
   flex: 0 0 auto;
   width: 41px;
   height: 41px;
   place-items: center;
   overflow: hidden;
-  border: 1px solid #e3b9758c;
+  border: 1px solid #76b6ac60;
   border-radius: 13px;
-  background: #182737;
-  box-shadow: inset 0 0 0 3px #e3b97512;
+  background: radial-gradient(circle at 52% 65%, #2a5157, #162a3a 75%);
+  box-shadow: inset 0 0 0 3px #94dfd010;
 }
 
 .ds-chat-avatar img {
   display: block;
-  width: 31px;
-  height: 31px;
+  width: 36px;
+  height: 36px;
   object-fit: contain;
+}
+
+.ds-chat-avatar-launcher {
+  width: 54px;
+  height: 52px;
+  overflow: visible;
+  border-radius: 15px;
+  animation: dsch-mascot-intro .73s cubic-bezier(.2, .75, .3, 1) .22s both;
+}
+
+.ds-chat-avatar-launcher img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 59px;
+  max-width: none;
+  height: 59px;
+  transform: translate(-50%, -52%);
+  filter: drop-shadow(0 4px 4px #020b1480);
+  transition: transform .25s ease;
+}
+
+@keyframes dsch-mascot-intro {
+  0% { transform: translateY(3px) scale(.94); }
+  57% { transform: translateY(-3px) scale(1.035) rotate(-4deg); }
+  100% { transform: translateY(0) scale(1) rotate(0); }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ds-advisor-launcher:hover .ds-chat-avatar-launcher img {
+    transform: translate(-50%, -57%) rotate(-4deg);
+  }
 }
 
 .ds-launcher-label {
   display: grid;
+  flex: 1;
+  min-width: 0;
   gap: 2px;
   text-align: left;
   line-height: 1.25;
@@ -116,7 +154,7 @@ html.light #ds-advisor {
 .ds-launcher-arrow {
   width: 16px;
   height: 16px;
-  margin-left: 4px;
+  flex: 0 0 16px;
   color: var(--dsch-accent);
 }
 
@@ -276,10 +314,34 @@ html.light .ds-advisor-panel {
   pointer-events: none;
 }
 
-.ds-chat-intro-graphic svg {
+.ds-chat-intro-graphic::before,
+.ds-chat-intro-graphic::after {
+  position: absolute;
+  width: 80%;
+  height: 49%;
+  border: 1px solid color-mix(in srgb, var(--dsch-accent) 37%, transparent);
+  border-radius: 50%;
+  content: "";
+}
+
+.ds-chat-intro-graphic::before {
+  transform: rotate(-24deg);
+}
+
+.ds-chat-intro-graphic::after {
+  transform: rotate(19deg);
+  border-color: color-mix(in srgb, var(--dsch-gold) 29%, transparent);
+}
+
+.ds-chat-intro-graphic img {
+  position: relative;
+  z-index: 1;
   display: block;
-  max-width: 100%;
-  max-height: 100%;
+  width: min(63%, 84px);
+  height: auto;
+  max-height: 89%;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 8px #07132359);
 }
 
 .ds-chat-messages {
@@ -514,7 +576,10 @@ html.light .ds-advisor-panel {
 
 @media (max-width: 767px) {
   #ds-advisor {
-    right: max(12px, env(safe-area-inset-right, 0px));
+    --dsch-launcher-width: 177px;
+    --dsch-projection-origin: 145px;
+    --dsch-mobile-edge: max(12px, env(safe-area-inset-right, 0px));
+    right: var(--dsch-mobile-edge);
     bottom: max(74px, calc(env(safe-area-inset-bottom, 0px) + 65px));
   }
 
@@ -528,20 +593,35 @@ html.light .ds-advisor-panel {
     border-radius: 19px;
   }
 
+  @supports (width: 100dvw) {
+    #ds-advisor {
+      /* Anchor to the visible width even if other homepage content overflows. */
+      right: auto;
+      left: calc(100dvw - var(--dsch-launcher-width) - var(--dsch-mobile-edge));
+    }
+
+    .ds-advisor-panel {
+      right: auto;
+      width: calc(100dvw - max(8px, env(safe-area-inset-left, 0px)) - max(8px, env(safe-area-inset-right, 0px)));
+    }
+  }
+
   .ds-advisor-launcher {
-    min-height: 50px;
+    gap: 10px;
+    min-height: 56px;
     padding: 5px 9px 5px 6px;
     border-radius: 15px;
   }
 
-  .ds-advisor-launcher .ds-chat-avatar {
-    width: 37px;
-    height: 37px;
+  .ds-chat-avatar-launcher {
+    width: 43px;
+    height: 43px;
+    border-radius: 12px;
   }
 
-  .ds-advisor-launcher .ds-chat-avatar img {
-    width: 27px;
-    height: 27px;
+  .ds-chat-avatar-launcher img {
+    width: 49px;
+    height: 49px;
   }
 
   .ds-chat-header {
@@ -604,11 +684,21 @@ html.light .ds-advisor-panel {
 
 @media (prefers-reduced-motion: reduce) {
   #ds-advisor.is-open .ds-advisor-panel,
+  .ds-chat-avatar-launcher,
   .ds-chat-typing-dots i {
     animation: none;
   }
 
-  .ds-advisor-launcher {
+  .ds-advisor-launcher,
+  .ds-chat-avatar-launcher img {
     transition: none;
+  }
+
+  .ds-advisor-launcher:is(:hover, :focus-visible) {
+    transform: none;
+  }
+
+  .ds-advisor-launcher:hover .ds-chat-avatar-launcher img {
+    transform: translate(-50%, -52%);
   }
 }

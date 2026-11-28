@@ -2273,7 +2273,8 @@ html.light footer .text-zinc-500 { color:#607080!important; }
   }
 </style>
   <link rel="stylesheet" href="services-pricing.css">
-  <link rel="stylesheet" href="/digisaathi.css">
+  <link rel="stylesheet" href="/digisaathi.css?v=mascot-1">
+  <link rel="stylesheet" href="/digisaathi-promo.css">
   <link rel="stylesheet" href="/home-process.css">
   <link rel="stylesheet" href="/client-feedback.css">
   <link rel="stylesheet" href="/home-why-businesses.css">
@@ -6634,28 +6635,26 @@ const CrystalizedBall = ({
 
   <section id="ds-advisor" class="ds-advisor" aria-label="Digi Shatakshi virtual advisor">
     <button id="ds-advisor-launcher" class="ds-advisor-launcher" type="button" aria-expanded="false" aria-controls="ds-advisor-panel">
-      <span class="ds-chat-avatar"><img src="/assets/favicon.svg" alt="" width="32" height="32"></span>
+      <span class="ds-chat-avatar ds-chat-avatar-launcher" aria-hidden="true">
+        <img src="/assets/digisaathi-mascot.webp" alt="" width="62" height="62" decoding="async">
+      </span>
       <span class="ds-launcher-label"><strong>DigiSaathi</strong><small>Chat with us</small></span>
       <svg class="ds-launcher-arrow" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11.5a7 7 0 1 1 3.5 6L5 19l.8-3.7A7 7 0 0 1 5 11.5Z"/><path d="M9 11.5h6m-6 3h3"/></svg>
     </button>
     <div id="ds-advisor-panel" class="ds-advisor-panel" role="dialog" aria-labelledby="ds-chat-name" hidden>
       <header class="ds-chat-header">
-        <span class="ds-chat-avatar"><img src="/assets/favicon.svg" alt="" width="34" height="34"></span>
+        <span class="ds-chat-avatar" aria-hidden="true">
+          <img src="/assets/digisaathi-mascot.webp" alt="" width="42" height="42" decoding="async">
+        </span>
         <div class="ds-chat-agent"><strong id="ds-chat-name">DigiSaathi</strong><small><i aria-hidden="true"></i> Digi Shatakshi virtual assistant</small></div>
         <button id="ds-advisor-close" type="button" aria-label="Close chat"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
       </header>
       <div class="ds-chat-scroll" id="ds-chat-scroll">
         <div class="ds-chat-intro">
           <div class="ds-chat-intro-copy"><strong>English · हिन्दी · Hinglish</strong><p>Ask a question or choose a service.</p></div>
-          <svg class="ds-chat-intro-graphic" viewBox="0 0 158 84" fill="none" aria-hidden="true">
-            <ellipse cx="88" cy="42" rx="67" ry="25" transform="rotate(-22 88 42)" stroke="#7ccfb2" stroke-opacity=".45"/>
-            <ellipse cx="88" cy="42" rx="60" ry="24" transform="rotate(21 88 42)" stroke="#bec8fe" stroke-opacity=".35"/>
-            <rect x="67" y="18" width="54" height="47" rx="13" fill="#253e53" stroke="#98dbc2" stroke-opacity=".55"/>
-            <path d="M80 34h27m-27 8h20m-20 8h12" stroke="#b0e7d3" stroke-width="2" stroke-linecap="round"/>
-            <path d="m48 17 3 7 7 3-7 3-3 7-3-7-7-3 7-3 3-7Z" fill="#edc779"/>
-            <circle cx="136" cy="53" r="4" fill="#b0e7d3"/><circle cx="31" cy="58" r="3" fill="#a4affe"/>
-            <path d="M131 15v10m-5-5h10M48 57v8m-4-4h8" stroke="#c7d1ff" stroke-linecap="round" stroke-opacity=".75"/>
-          </svg>
+          <div class="ds-chat-intro-graphic" aria-hidden="true">
+            <img src="/assets/digisaathi-mascot.webp" alt="" width="80" height="80" decoding="async">
+          </div>
         </div>
         <div id="ds-chat-messages" class="ds-chat-messages" role="log" aria-label="Conversation" aria-live="polite" aria-relevant="additions"></div>
         <div id="ds-chat-typing" class="ds-chat-typing" hidden>
@@ -6684,56 +6683,19 @@ const CrystalizedBall = ({
         <div class="ds-chat-note">Our team confirms custom quotes and project details.</div>
       </div>
     </div>
-    <aside id="ds-christmas-promo" class="ds-christmas-promo" aria-label="Christmas growth offer" aria-hidden="true">
-      <button class="ds-promo-close" type="button" aria-label="Dismiss Christmas offer">×</button>
+    <aside id="ds-christmas-promo" class="ds-christmas-promo" aria-labelledby="ds-promo-title" aria-hidden="true" inert>
+      <span class="ds-promo-projection" aria-hidden="true"></span>
+      <button class="ds-promo-close" type="button" aria-label="Dismiss Christmas offer">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      </button>
       <div class="ds-promo-art" aria-hidden="true">
-        <svg class="ds-promo-scene" viewBox="0 0 240 170" role="presentation">
-          <defs>
-            <linearGradient id="ds-xmas-sky" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#213b45"/><stop offset="1" stop-color="#351e35"/></linearGradient>
-            <linearGradient id="ds-xmas-coat" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ef5a53"/><stop offset="1" stop-color="#a92239"/></linearGradient>
-            <radialGradient id="ds-xmas-glow"><stop stop-color="#ffd987" stop-opacity=".48"/><stop offset="1" stop-color="#ffd987" stop-opacity="0"/></radialGradient>
-          </defs>
-          <rect width="240" height="170" rx="18" fill="url(#ds-xmas-sky)"/>
-          <circle cx="185" cy="73" r="63" fill="url(#ds-xmas-glow)"/>
-          <path d="M0 139Q56 123 111 141t129-2v31H0Z" fill="#d8e6e5" opacity=".92"/>
-          <g fill="#f7e9c2">
-            <circle class="ds-promo-snow ds-snow-one" cx="30" cy="25" r="2"/><circle class="ds-promo-snow ds-snow-two" cx="76" cy="49" r="1.7"/>
-            <circle class="ds-promo-snow ds-snow-three" cx="204" cy="28" r="2"/><circle class="ds-promo-snow ds-snow-four" cx="183" cy="112" r="1.5"/>
-            <path d="M35 69v10m-5-5h10M202 82v9m-4.5-4.5h9" stroke="#f7e9c2" stroke-width="1.5" opacity=".8"/>
-          </g>
-          <g class="ds-promo-bell ds-promo-bell-left" fill="#f2c56b" stroke="#ffe8a6" stroke-width="1">
-            <path d="M47 48c0-7 11-7 11 0 0 4 2 5 3 7H44c1-2 3-3 3-7Z"/><path d="M43 56h19" stroke-width="2"/><circle cx="52.5" cy="59" r="1.7" fill="#ffe8a6" stroke="none"/>
-          </g>
-          <g class="ds-promo-bell ds-promo-bell-right" fill="#f2c56b" stroke="#ffe8a6" stroke-width="1">
-            <path d="M180 42c0-7 11-7 11 0 0 4 2 5 3 7h-17c1-2 3-3 3-7Z"/><path d="M176 50h19" stroke-width="2"/><circle cx="185.5" cy="53" r="1.7" fill="#ffe8a6" stroke="none"/>
-          </g>
-          <g class="ds-promo-santa">
-            <ellipse cx="123" cy="149" rx="39" ry="7" fill="#24323a" opacity=".18"/>
-            <path d="M87 145c2-27 17-39 36-39s34 12 36 39Z" fill="url(#ds-xmas-coat)"/>
-            <path d="M91 125q32 13 64 0" fill="none" stroke="#fff0df" stroke-width="7" stroke-linecap="round"/>
-            <rect x="119" y="126" width="8" height="18" rx="3" fill="#f5d274"/>
-            <circle cx="123" cy="78" r="29" fill="#f4c9a7"/>
-            <path d="M95 75q-2-29 28-35 22 3 27 27-21-9-55 8Z" fill="#bb3343"/>
-            <path d="M94 75q29-15 58-4" fill="none" stroke="#fff4e5" stroke-width="9" stroke-linecap="round"/>
-            <circle cx="148" cy="40" r="8" fill="#fff4e5"/>
-            <path d="M97 86q4 35 26 36 25-2 27-36-11 13-27 11-17 2-26-11Z" fill="#fff4e5"/>
-            <circle cx="113" cy="78" r="2" fill="#48343a"/><circle cx="133" cy="78" r="2" fill="#48343a"/>
-            <ellipse cx="123" cy="87" rx="4" ry="3" fill="#e98d7e"/>
-            <path d="M116 95q7 6 14 0" fill="none" stroke="#a95758" stroke-width="1.7" stroke-linecap="round"/>
-            <path d="M92 117q-11 4-15 15" fill="none" stroke="#bb3343" stroke-width="10" stroke-linecap="round"/>
-            <circle cx="77" cy="134" r="6" fill="#fff4e5"/>
-            <path d="M154 117q11 4 15 15" fill="none" stroke="#bb3343" stroke-width="10" stroke-linecap="round"/>
-            <circle cx="170" cy="134" r="6" fill="#fff4e5"/>
-          </g>
-          <path d="M24 128q8-11 16 0M197 128q8-11 16 0" fill="none" stroke="#82c5ab" stroke-width="3" stroke-linecap="round"/>
-        </svg>
+        <img class="ds-promo-santa" src="/assets/digisaathi-santa.webp" alt="" width="320" height="320" fetchpriority="low" decoding="async">
       </div>
       <div class="ds-promo-copy">
-        <span class="ds-promo-kicker">A little festive sparkle</span>
-        <h2>Christmas Growth Offer</h2>
-        <p>Chat with Digi Saathi to learn about our seasonal marketing offer.</p>
+        <h2 id="ds-promo-title">Christmas Growth Offer</h2>
+        <p>Tell us what you’d like to promote this season and ask what offers are available.</p>
         <div class="ds-promo-actions">
-          <button class="ds-promo-primary" type="button">Ask Digi Saathi <span aria-hidden="true">→</span></button>
+          <button class="ds-promo-primary" type="button">Ask DigiSaathi <span aria-hidden="true">→</span></button>
         </div>
         <small>Offer details confirmed by our team.</small>
       </div>
@@ -6768,31 +6730,6 @@ const CrystalizedBall = ({
     html.light footer{border-top-color:rgba(31,53,69,.16)!important}
     @media(max-width:640px){#ds-main-header.is-compact .ds-nav-cta{padding:.45rem .6rem;font-size:.76rem}#ds-main-header.is-compact .ds-nav-inner{gap:.5rem}}
     @media(prefers-reduced-motion:reduce){#ds-main-header,#ds-main-header *{transition:none!important}}
-
-    #ds-christmas-promo{position:fixed;right:26px;bottom:96px;z-index:2;width:min(410px,calc(100vw - 32px));display:grid;grid-template-columns:128px 1fr;align-items:center;gap:15px;padding:15px;border:1px solid rgba(247,205,127,.4);border-radius:22px;background:radial-gradient(ellipse at 2% 2%,rgba(64,151,111,.18),transparent 48%),linear-gradient(145deg,#172e2b 0%,#20212c 58%,#33212e 100%);color:#fbf4e8;box-shadow:0 24px 72px rgba(2,8,16,.48),0 0 28px rgba(218,169,91,.12);opacity:0;visibility:hidden;pointer-events:none;transform:translate3d(0,12px,0) scale(.98);transition:opacity .3s ease,transform .34s cubic-bezier(.2,.8,.2,1),visibility .3s}
-    #ds-christmas-promo.is-visible{opacity:1;visibility:visible;pointer-events:auto;transform:translate3d(0,0,0) scale(1)}
-    .ds-promo-close{position:absolute;right:8px;top:8px;z-index:1;display:grid;place-items:center;width:29px;height:29px;border:1px solid rgba(255,255,255,.2);border-radius:50%;background:rgba(12,21,24,.7);color:#fff;font-size:19px;line-height:1}
-    .ds-promo-close:hover{background:rgba(255,255,255,.15)}
-    .ds-promo-art{position:relative;display:grid;place-items:center;min-height:132px;border-radius:16px;overflow:hidden;background:linear-gradient(155deg,rgba(255,255,255,.1),rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.15)}
-    .ds-promo-scene{display:block;width:100%;height:100%;min-height:132px}
-    .ds-promo-santa{transform-origin:123px 146px;animation:dsSantaBob 2.8s ease-in-out infinite}
-    .ds-promo-bell{transform-box:fill-box;transform-origin:50% 10%;animation:dsBellRing 2.4s ease-in-out infinite}
-    .ds-promo-bell-right{animation-delay:.45s}
-    .ds-promo-snow{animation:dsSnowDrift 3.2s ease-in-out infinite}
-    .ds-snow-two{animation-delay:.7s}.ds-snow-three{animation-delay:1.2s}.ds-snow-four{animation-delay:1.8s}
-    @keyframes dsSantaBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
-    @keyframes dsBellRing{0%,78%,100%{transform:rotate(0)}84%{transform:rotate(13deg)}90%{transform:rotate(-11deg)}96%{transform:rotate(6deg)}}
-    @keyframes dsSnowDrift{0%,100%{opacity:.35;transform:translateY(-3px)}50%{opacity:1;transform:translateY(5px)}}
-    .ds-promo-kicker{display:block;margin:0 28px 5px 0;color:#f0c66f;font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
-    .ds-promo-copy h2{margin:0 23px 6px 0;color:#fff6e8;font:800 20px/1.13 Manrope,sans-serif;letter-spacing:-.04em}
-    .ds-promo-copy p{margin:0;color:#d4ded7;font:400 11px/1.5 'DM Sans',sans-serif}
-    .ds-promo-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-    .ds-promo-primary{min-height:35px;padding:0 12px;border:1px solid rgba(255,235,191,.3);border-radius:10px;background:linear-gradient(110deg,#f1c96e,#e9a94f);color:#25231b;font:800 10px 'DM Sans',sans-serif;box-shadow:0 7px 18px rgba(218,169,91,.2);transition:transform .2s ease,filter .2s ease}
-    .ds-promo-primary:hover{transform:translateY(-2px);filter:brightness(1.06)}
-    .ds-promo-copy small{display:block;margin-top:7px;color:#aabbb0;font:400 9px 'DM Sans',sans-serif}
-    @media(max-width:640px){#ds-christmas-promo{right:12px;bottom:143px;width:min(410px,calc(100vw - 40px));grid-template-columns:96px 1fr;gap:10px;padding:12px;border-radius:19px}.ds-promo-art{min-height:112px}.ds-promo-scene{min-height:112px}.ds-promo-copy h2{font-size:17px}.ds-promo-copy p{font-size:10px}.ds-promo-primary{min-height:33px;padding:0 9px;font-size:9px}}
-    @media(max-width:380px){#ds-christmas-promo{grid-template-columns:78px 1fr;gap:8px;padding:10px}.ds-promo-copy h2{font-size:15px}.ds-promo-kicker{font-size:8px}.ds-promo-art,.ds-promo-scene{min-height:102px}}
-    @media(prefers-reduced-motion:reduce){#ds-main-header,#ds-christmas-promo{transition:none}.ds-promo-santa,.ds-promo-bell,.ds-promo-snow{animation:none}}
 
     /* Connect With Us social profile section */
     .ds-social-section { background: radial-gradient(ellipse at 15% 45%, rgba(29,78,216,.13), transparent 38%), radial-gradient(ellipse at 85% 55%, rgba(198,163,106,.10), transparent 36%), rgba(12,16,24,.72); }
@@ -7451,7 +7388,7 @@ html.light #app-root .pricing-plan-card:hover {
       // Premium enquiry modal: show once per session, with a video-led layout.
       window.setTimeout(()=>{
         if(sessionStorage.getItem('ds-enquiry-seen')==='1') return;
-        if(document.querySelector('.modal:not(.hidden), #blog-modal.is-open, #ds-quote-modal.is-open, #ds-advisor.is-open')) return;
+        if(document.querySelector('.modal:not(.hidden), #blog-modal.is-open, #ds-quote-modal.is-open, #ds-advisor.is-open, #ds-christmas-promo.is-visible')) return;
         window.dsOpenQuoteModal?.();
         sessionStorage.setItem('ds-enquiry-seen','1');
       },12000);
@@ -7467,6 +7404,6 @@ html.light #app-root .pricing-plan-card:hover {
   }
 </script>
   <script src="/digisaathi-answers.js" defer></script>
-  <script src="/digisaathi-chat.js" defer></script>
+  <script src="/digisaathi-chat.js?v=mascot-1" defer></script>
 </body>
 </html>
