@@ -1,197 +1,234 @@
 #app-root #ds-pricing-page {
-  --dsp-ink: var(--ed-ink, #f2eee4);
-  --dsp-muted: var(--ed-muted, #adb8b6);
-  --dsp-paper: var(--ed-bg, #101619);
-  --dsp-surface: var(--ed-surface, #161e22);
-  --dsp-panel: var(--ed-panel, #1d282c);
-  --dsp-line: var(--ed-line, #344146);
-  --dsp-accent: var(--ed-accent, #b9d2b9);
-  --dsp-warm: var(--ed-warm, #e4bb84);
-  --dsp-art-ink: #1b2727;
-  --dsp-art-paper: #f2eee4;
-  padding: clamp(40px, 6vw, 84px) 0 clamp(68px, 8vw, 108px);
+  --dsp-ink: var(--text-primary, #f4f1eb);
+  --dsp-ink-soft: var(--text-muted, #b1bbc8);
+  --dsp-muted: #9aa6b4;
+  --dsp-paper: var(--bg-primary, #0d1118);
+  --dsp-surface: var(--bg-card, rgba(25, 31, 42, .82));
+  --dsp-line: var(--border-subtle, rgba(226, 213, 190, .14));
+  --dsp-mint: #92d7bd;
+  --dsp-mint-deep: #70caaa;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(48px, 7.3vw, 104px) 0 clamp(72px, 8vw, 118px);
   background: var(--dsp-paper);
   color: var(--dsp-ink);
   font-family: var(--font-body, 'DM Sans', sans-serif);
   line-height: 1.6;
 }
 
-html.light #app-root #ds-pricing-page {
-  --dsp-ink: var(--ed-ink, #252421);
-  --dsp-muted: var(--ed-muted, #575851);
-  --dsp-paper: var(--ed-bg, #f3f0e9);
-  --dsp-surface: var(--ed-surface, #eeebe1);
-  --dsp-panel: var(--ed-panel, #e8e6dc);
-  --dsp-line: var(--ed-line, #cfccc0);
-  --dsp-accent: var(--ed-accent, #3c5e46);
-  --dsp-warm: var(--ed-warm, #875629);
+#app-root #ds-pricing-page *,
+#app-root #ds-pricing-page *::before,
+#app-root #ds-pricing-page *::after { box-sizing: border-box; }
+
+#app-root #ds-pricing-page h1,
+#app-root #ds-pricing-page h2,
+#app-root #ds-pricing-page h3,
+#app-root #ds-pricing-page h4 {
+  color: var(--dsp-ink) !important;
+  font-family: var(--font-heading, 'Manrope', sans-serif);
 }
 
-#ds-pricing-page *,
-#ds-pricing-page *::before,
-#ds-pricing-page *::after { box-sizing: border-box; }
+#app-root #ds-pricing-page p { color: var(--dsp-ink-soft) !important; }
+
+html.light #app-root #ds-pricing-page {
+  --dsp-ink: #202633;
+  --dsp-ink-soft: #535e6e;
+  --dsp-muted: #737d8a;
+  --dsp-paper: #f6f4ef;
+  --dsp-surface: rgba(255,255,255,.94);
+  --dsp-line: rgba(35,43,56,.15);
+  --dsp-mint-deep: #2b806b;
+}
 
 #app-root #ds-pricing-page .ds-pricing-container {
-  width: min(var(--ed-max, 1220px), calc(100% - 2 * var(--ed-gutter, clamp(18px, 4vw, 60px))));
+  width: min(1380px, calc(100% - clamp(36px, 9vw, 144px)));
   margin-inline: auto;
 }
 
 #app-root #ds-pricing-page .ds-pricing-hero {
   display: grid;
-  grid-template-columns: minmax(0, 1.65fr) minmax(220px, .85fr);
+  grid-template-columns: minmax(0, 1.4fr) minmax(230px, .6fr);
   align-items: end;
-  gap: 16px clamp(24px, 5vw, 72px);
-  margin-bottom: clamp(22px, 4vw, 50px);
-  padding-bottom: clamp(25px, 4vw, 47px);
-  border-bottom: 1px solid var(--dsp-line);
+  gap: clamp(32px, 7vw, 112px);
+  margin-bottom: clamp(46px, 7vw, 88px);
+}
+
+#app-root #ds-pricing-page .ds-pricing-kicker,
+#app-root #ds-pricing-page .ds-pricing-section-label {
+  margin: 0;
+  color: var(--dsp-mint-deep) !important;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .19em;
+  line-height: 1.4;
+  text-transform: uppercase;
 }
 
 #app-root #ds-pricing-page .ds-pricing-hero h1 {
-  max-width: none;
-  margin: 0;
-  color: var(--dsp-ink);
-  font: 700 clamp(2.75rem, 6.8vw, 5.9rem)/.99 var(--font-heading, 'Manrope', sans-serif);
-  letter-spacing: -.075em;
+  max-width: 11ch;
+  margin: 20px 0 0;
+  font-size: clamp(3.45rem, 7vw, 7.2rem);
+  font-weight: 800;
+  letter-spacing: -.078em;
+  line-height: .91;
   text-wrap: balance;
 }
 
+#app-root #ds-pricing-page .ds-pricing-hero h1 em {
+  color: var(--dsp-mint-deep);
+  font-style: normal;
+}
+
 #app-root #ds-pricing-page .ds-pricing-intro {
-  max-width: 34ch;
-  margin: 0;
-  color: var(--dsp-muted) !important;
-  font-size: clamp(.96rem, 1.5vw, 1.125rem);
-  line-height: 1.55;
+  max-width: 350px;
+  margin: 0 0 7px;
+  padding-left: 22px;
+  border-left: 1px solid var(--dsp-line);
+  font-size: 15px;
+  line-height: 1.75;
 }
 
 #app-root #ds-pricing-page .ds-pricing-workbench {
   display: grid;
-  grid-template:
-    'selector study' auto
-    'offer offer' auto
-    / minmax(245px, .8fr) minmax(0, 1.5fr);
+  grid-template-columns: minmax(245px, .66fr) minmax(0, 1.55fr);
   align-items: start;
-  gap: clamp(31px, 5vw, 65px) clamp(24px, 6vw, 83px);
+  gap: clamp(36px, 6vw, 94px);
 }
 
-#app-root #ds-pricing-page .ds-pricing-selector { grid-area: selector; min-width: 0; }
-#app-root #ds-pricing-page #ds-pricing-offer { grid-area: offer; min-width: 0; }
+#app-root #ds-pricing-page .ds-pricing-selector-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
 
-#app-root #ds-pricing-page .ds-pricing-section-label {
-  margin: 0 0 12px;
+#app-root #ds-pricing-page .ds-pricing-selector-heading span:last-child {
   color: var(--dsp-muted);
-  font: 700 .75rem/1.5 var(--font-body, 'DM Sans', sans-serif);
-  letter-spacing: .09em;
-  text-transform: uppercase;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
 }
 
 #app-root #ds-pricing-page .ds-pricing-options {
+  position: relative;
   border-top: 1px solid var(--dsp-line);
+}
+
+#app-root #ds-pricing-page .ds-pricing-marker {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 88px;
+  border-radius: 0 3px 3px 0;
+  background: var(--dsp-mint-deep);
+  transform: translateY(0);
+  transition: transform .32s cubic-bezier(.22,.8,.28,1), height .22s ease;
+  pointer-events: none;
 }
 
 #app-root #ds-pricing-page .ds-pricing-option {
   display: grid;
   width: 100%;
-  min-height: 66px;
-  grid-template-columns: 2rem minmax(0, 1fr) 1.2rem;
+  min-height: 88px;
+  grid-template-columns: 34px minmax(0, 1fr) 20px;
   align-items: center;
-  gap: 8px;
-  padding: 10px 10px 10px 13px;
+  gap: 11px;
+  padding: 14px 8px 14px 17px;
   border: 0;
   border-bottom: 1px solid var(--dsp-line);
-  border-left: 2px solid transparent;
   background: transparent;
   color: var(--dsp-muted);
   cursor: pointer;
   text-align: left;
-  transition: color .18s ease, background-color .18s ease;
+  transition: color .2s ease, background-color .2s ease;
 }
 
-#app-root #ds-pricing-page .ds-pricing-option:hover {
-  background: var(--dsp-surface);
-  color: var(--dsp-ink);
-}
-
-#app-root #ds-pricing-page .ds-pricing-option[aria-pressed="true"] {
-  border-left-color: var(--dsp-accent);
-  background: var(--dsp-panel);
-  color: var(--dsp-ink);
-}
+#app-root #ds-pricing-page .ds-pricing-option:hover { color: var(--dsp-ink); background: rgba(255,255,255,.045); }
+#app-root #ds-pricing-page .ds-pricing-option[aria-pressed="true"] { color: var(--dsp-ink); }
 
 #app-root #ds-pricing-page .ds-pricing-option-number {
+  align-self: center;
   color: var(--dsp-muted);
-  font-size: .78rem;
+  font-size: 11px;
   font-variant-numeric: tabular-nums;
-  letter-spacing: .02em;
+  letter-spacing: .06em;
 }
 
-#app-root #ds-pricing-page .ds-pricing-option[aria-pressed="true"] .ds-pricing-option-number {
-  color: var(--dsp-accent);
-}
+#app-root #ds-pricing-page .ds-pricing-option[aria-pressed="true"] .ds-pricing-option-number { color: var(--dsp-mint-deep); }
 
 #app-root #ds-pricing-page .ds-pricing-option-title {
-  font: 700 clamp(1rem, 2vw, 1.27rem)/1.24 var(--font-heading, 'Manrope', sans-serif);
-  letter-spacing: -.029em;
+  font-family: var(--font-heading, 'Manrope', sans-serif);
+  font-size: clamp(1.15rem, 1.75vw, 1.58rem);
+  font-weight: 650;
+  letter-spacing: -.045em;
+  line-height: 1.12;
 }
 
-#app-root #ds-pricing-page .ds-pricing-option-arrow {
-  justify-self: center;
-  color: var(--dsp-accent);
-  font-size: 1.2rem;
-  opacity: .55;
+#app-root #ds-pricing-page .ds-pricing-option[aria-pressed="true"] .ds-pricing-option-title { font-weight: 800; }
+#app-root #ds-pricing-page .ds-pricing-option-arrow { color: var(--dsp-mint-deep); font-size: 20px; line-height: 1; opacity: 0; transform: translate(-4px,4px); transition: opacity .2s ease, transform .2s ease; }
+#app-root #ds-pricing-page .ds-pricing-option[aria-pressed="true"] .ds-pricing-option-arrow { opacity: 1; transform: translate(0,0); }
+
+#app-root #ds-pricing-page button:focus-visible,
+#app-root #ds-pricing-page a:focus-visible,
+#app-root #ds-pricing-page summary:focus-visible {
+  outline: 3px solid var(--dsp-mint) !important;
+  outline-offset: 4px;
 }
 
-#app-root #ds-pricing-page .ds-pricing-option[aria-pressed="true"] .ds-pricing-option-arrow,
-#app-root #ds-pricing-page .ds-pricing-option:hover .ds-pricing-option-arrow { opacity: 1; }
-
-#app-root #ds-pricing-page :is(button, a):focus-visible {
-  position: relative;
-  z-index: 1;
-  outline: 2px solid var(--dsp-accent);
-  outline-offset: 3px;
-}
+#app-root #ds-pricing-page .ds-pricing-main { min-width: 0; }
 
 #app-root #ds-pricing-page .ds-pricing-artwork {
-  --dsp-study-height: clamp(310px, 36vw, 398px);
-  grid-area: study;
-  min-width: 0;
-  min-height: var(--dsp-study-height);
+  position: relative;
+  min-height: 438px;
   overflow: hidden;
-  border: 1px solid var(--dsp-line);
-  border-radius: 12px;
-  background: #222d2e;
-  color: var(--dsp-art-paper);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 26px;
+  background: #142b39;
+  color: #f7f4ed;
+  box-shadow: 0 22px 54px rgba(15,39,50,.14);
+  opacity: 1;
+  transition: opacity .19s ease;
 }
+
+#app-root #ds-pricing-page .ds-pricing-artwork.is-switching { opacity: .2; }
 
 #app-root #ds-pricing-page .ds-art-scene {
   position: relative;
-  min-height: var(--dsp-study-height);
+  min-height: 438px;
+  height: 100%;
   overflow: hidden;
-  background-image: linear-gradient(#f2eee411 1px, transparent 1px), linear-gradient(90deg, #f2eee411 1px, transparent 1px);
-  background-size: 40px 40px;
+  background-image: linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px), linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);
+  background-size: 32px 32px;
+  transform: perspective(1300px) rotateX(var(--dsp-tilt-y,0deg)) rotateY(var(--dsp-tilt-x,0deg));
+  transform-style: preserve-3d;
+  transition: transform .24s cubic-bezier(.2,.7,.25,1);
 }
 
-#app-root #ds-pricing-page .ds-art-scene.is-entering,
-#app-root #ds-pricing-page .ds-pricing-offer.is-entering {
-  animation: dsp-sheet-enter .26s ease-out both;
+#app-root #ds-pricing-page .ds-art-caption {
+  position: absolute;
+  z-index: 10;
+  top: 22px;
+  left: 24px;
+  color: #bfd2d5;
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: .16em;
+  line-height: 1.4;
+  text-transform: uppercase;
 }
 
-@keyframes dsp-sheet-enter {
-  from { opacity: .15; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-#app-root #ds-pricing-page .ds-art-caption,
 #app-root #ds-pricing-page .ds-art-note {
   position: absolute;
   z-index: 10;
-  color: #d2d9ce;
-  font-size: .67rem;
-  font-weight: 650;
-  letter-spacing: .045em;
-  line-height: 1.35;
+  right: 22px;
+  bottom: 20px;
+  color: rgba(244,242,233,.65);
+  font-size: 10px;
+  letter-spacing: .05em;
 }
-#app-root #ds-pricing-page .ds-art-caption { top: 15px; left: 17px; }
-#app-root #ds-pricing-page .ds-art-note { right: 16px; bottom: 12px; }
 
 /* Website showcase */
 #app-root #ds-pricing-page .ds-browser-window {
@@ -203,9 +240,9 @@ html.light #app-root #ds-pricing-page {
   overflow: hidden;
   border: 1px solid rgba(255,255,255,.34);
   border-radius: 12px;
-  background: var(--dsp-art-paper);
-  color: var(--dsp-art-ink);
-  box-shadow: 0 9px 22px #0b111630;
+  background: #fffdf7;
+  color: #183242;
+  box-shadow: 0 28px 60px rgba(0,0,0,.32);
 }
 
 #app-root #ds-pricing-page .ds-browser-bar { display: flex; height: 25px; align-items: center; gap: 5px; padding: 0 10px; border-bottom: 1px solid #e6e6df; background: #f3f3ef; }
@@ -214,311 +251,216 @@ html.light #app-root #ds-pricing-page {
 #app-root #ds-pricing-page .ds-site-nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px 9px; font-size: 7px; letter-spacing: .035em; }
 #app-root #ds-pricing-page .ds-site-wordmark { font-family: var(--font-heading, 'Manrope', sans-serif); font-size: 12px; font-weight: 800; letter-spacing: -.06em; }
 #app-root #ds-pricing-page .ds-site-links { color: #60737a; word-spacing: 10px; }
-#app-root #ds-pricing-page .ds-site-hero { position: relative; display: flex; min-height: 160px; flex-direction: column; justify-content: center; padding: 13px 20px 25px; background: #dee4d8; }
-#app-root #ds-pricing-page .ds-site-hero::after { position: absolute; right: 12%; bottom: 16%; width: 26%; height: 54%; border: 1px solid rgba(20,44,58,.15); background: #b9c4b8; content: ''; transform: rotate(7deg); }
-#app-root #ds-pricing-page .ds-site-eyebrow { color: #41614b; font-size: 7px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
-#app-root #ds-pricing-page .ds-site-hero strong { position: relative; z-index: 1; margin: 7px 0 8px; font-family: var(--font-heading, 'Manrope', sans-serif); font-size: clamp(21px,3vw,38px); font-weight: 800; letter-spacing: -.08em; line-height: .94; }
-#app-root #ds-pricing-page .ds-site-hero strong em { color: #41614b; font-style: normal; }
-#app-root #ds-pricing-page #app-root #ds-pricing-page .ds-site-link { position: relative; z-index: 1; display: inline-flex; width: max-content; padding: 5px 9px; background: var(--dsp-art-ink); color: var(--dsp-art-paper); font-size: 7px; font-weight: 700; }
+#app-root #ds-pricing-page .ds-site-hero { position: relative; display: flex; min-height: 160px; flex-direction: column; justify-content: center; padding: 13px 20px 25px; background: #e8eee7; }
+#app-root #ds-pricing-page .ds-site-hero::after { position: absolute; right: 12%; bottom: 16%; width: 26%; height: 54%; border: 1px solid rgba(20,44,58,.15); background: #d4e0d7; content: ''; transform: rotate(7deg); }
+#app-root #ds-pricing-page .ds-site-eyebrow { color: #468873; font-size: 7px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+#app-root #ds-pricing-page .ds-site-hero h3 { position: relative; z-index: 1; margin: 7px 0 4px; font-size: clamp(21px,3vw,39px); font-weight: 800; letter-spacing: -.08em; line-height: .94; }
+#app-root #ds-pricing-page .ds-site-hero h3 em { color: #43836e; font-style: normal; }
+#app-root #ds-pricing-page .ds-site-hero p { position: relative; z-index: 1; margin: 3px 0 9px; color: #52656c !important; font-size: 8px; }
+#app-root #ds-pricing-page .ds-site-link { position: relative; z-index: 1; display: inline-flex; width: max-content; padding: 5px 9px; background: #193746; color: #fffdf7; font-size: 7px; font-weight: 700; }
 #app-root #ds-pricing-page .ds-site-below { display: grid; grid-template-columns: 1.3fr .7fr; gap: 10px; padding: 12px 18px; }
 #app-root #ds-pricing-page .ds-site-below span { display: block; height: 5px; margin: 0 0 5px; border-radius: 5px; background: #dce2dc; }
 #app-root #ds-pricing-page .ds-site-below span:first-child { width: 62%; background: #889c91; }
-#app-root #ds-pricing-page .ds-mobile-frame { position: absolute; z-index: 3; right: 5%; bottom: 4%; width: 25%; height: 74%; overflow: hidden; border: 5px solid #1b2425; border-radius: 23px; background: var(--dsp-art-paper); box-shadow: 0 8px 18px #0b11163d; }
-#app-root #ds-pricing-page .ds-mobile-notch { width: 31%; height: 7px; margin: 0 auto 10px; border-radius: 0 0 6px 6px; background: #1b2425; }
-#app-root #ds-pricing-page .ds-mobile-logo { margin: 7px 9px; font-family: var(--font-heading, 'Manrope', sans-serif); font-size: 8px; font-weight: 800; color: var(--dsp-art-ink); }
-#app-root #ds-pricing-page .ds-mobile-visual { display: flex; height: 67%; flex-direction: column; justify-content: flex-end; padding: 10px 9px; background: #dee4d8; }
-#app-root #ds-pricing-page .ds-mobile-visual b { color: var(--dsp-art-ink); font-family: var(--font-heading, 'Manrope', sans-serif); font-size: clamp(12px,1.6vw,20px); letter-spacing: -.08em; line-height: .95; }
+#app-root #ds-pricing-page .ds-mobile-frame { position: absolute; z-index: 3; right: 5%; bottom: 4%; width: 25%; height: 74%; overflow: hidden; border: 5px solid #0d202b; border-radius: 23px; background: #fffdf7; box-shadow: 0 28px 55px rgba(0,0,0,.42); }
+#app-root #ds-pricing-page .ds-mobile-notch { width: 31%; height: 7px; margin: 0 auto 10px; border-radius: 0 0 6px 6px; background: #0d202b; }
+#app-root #ds-pricing-page .ds-mobile-logo { margin: 7px 9px; font-family: var(--font-heading, 'Manrope', sans-serif); font-size: 8px; font-weight: 800; color: #183242; }
+#app-root #ds-pricing-page .ds-mobile-visual { display: flex; height: 67%; flex-direction: column; justify-content: flex-end; padding: 10px 9px; background: #e8eee7; }
+#app-root #ds-pricing-page .ds-mobile-visual b { color: #193746; font-family: var(--font-heading, 'Manrope', sans-serif); font-size: clamp(12px,1.6vw,20px); letter-spacing: -.08em; line-height: .95; }
 #app-root #ds-pricing-page .ds-mobile-visual i { width: 55%; height: 4px; margin-top: 9px; background: #75b9a0; }
 
 /* Social editorial spread */
-#app-root #ds-pricing-page .ds-social-reel { position: absolute; top: 17%; left: 5%; width: 27%; height: 73%; padding: 7px; border: 1px solid rgba(255,255,255,.28); border-radius: 18px; background: #1b2425; box-shadow: 0 7px 16px #0b111624; }
-#app-root #ds-pricing-page .ds-social-reel-screen { position: relative; display: flex; width: 100%; height: 100%; flex-direction: column; justify-content: flex-end; overflow: hidden; border-radius: 12px; padding: 12px 10px; background: #d2dccd; color: var(--dsp-art-ink); }
-#app-root #ds-pricing-page .ds-social-reel-screen::before { position: absolute; top: -10%; right: -35%; width: 120%; height: 75%; border: 1px solid rgba(18,44,58,.14); border-radius: 50%; background: #afbfad; content: ''; transform: rotate(-17deg); }
-#app-root #ds-pricing-page .ds-social-reel-screen::after { position: absolute; right: 6%; bottom: 25%; width: 40%; height: 48%; border-radius: 48% 48% 8px 8px; background: #caa479; content: ''; }
+#app-root #ds-pricing-page .ds-social-reel { position: absolute; top: 17%; left: 5%; width: 27%; height: 73%; padding: 7px; border: 1px solid rgba(255,255,255,.28); border-radius: 18px; background: #0a1d28; box-shadow: 0 20px 38px rgba(0,0,0,.28); }
+#app-root #ds-pricing-page .ds-social-reel-screen { position: relative; display: flex; width: 100%; height: 100%; flex-direction: column; justify-content: flex-end; overflow: hidden; border-radius: 12px; padding: 12px 10px; background: #b6cabf; color: #162d39; }
+#app-root #ds-pricing-page .ds-social-reel-screen::before { position: absolute; top: -10%; right: -35%; width: 120%; height: 75%; border: 1px solid rgba(18,44,58,.14); border-radius: 50%; background: #8ca99c; content: ''; transform: rotate(-17deg); }
+#app-root #ds-pricing-page .ds-social-reel-screen::after { position: absolute; right: 6%; bottom: 25%; width: 40%; height: 48%; border-radius: 48% 48% 8px 8px; background: #d7a277; content: ''; }
 #app-root #ds-pricing-page .ds-social-reel-screen span,
 #app-root #ds-pricing-page .ds-social-reel-screen strong { position: relative; z-index: 1; }
 #app-root #ds-pricing-page .ds-social-reel-screen span { font-size: 7px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
 #app-root #ds-pricing-page .ds-social-reel-screen strong { max-width: 9ch; margin-top: 7px; font-family: var(--font-heading, 'Manrope', sans-serif); font-size: clamp(16px,2vw,25px); letter-spacing: -.07em; line-height: .96; }
 #app-root #ds-pricing-page .ds-social-carousel { position: absolute; top: 22%; left: 37%; width: 40%; height: 55%; }
-#app-root #ds-pricing-page .ds-carousel-frame { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; padding: 13px; border: 1px solid rgba(255,255,255,.3); background: var(--dsp-art-paper); color: var(--dsp-art-ink); box-shadow: 0 6px 14px #0b111620; }
-#app-root #ds-pricing-page .ds-carousel-frame:nth-child(1) { transform: translate(-13px,13px) rotate(-7deg); background: #c4d1c2; }
-#app-root #ds-pricing-page .ds-carousel-frame:nth-child(2) { transform: translate(4px,4px) rotate(3deg); background: #e1d4bf; }
+#app-root #ds-pricing-page .ds-carousel-frame { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; padding: 13px; border: 1px solid rgba(255,255,255,.3); background: #f5f2e8; color: #173340; box-shadow: 0 18px 35px rgba(0,0,0,.22); }
+#app-root #ds-pricing-page .ds-carousel-frame:nth-child(1) { transform: translate(-13px,13px) rotate(-7deg); background: #d3e0d6; }
+#app-root #ds-pricing-page .ds-carousel-frame:nth-child(2) { transform: translate(4px,4px) rotate(3deg); background: #ead8c5; }
 #app-root #ds-pricing-page .ds-carousel-frame:nth-child(3) { transform: rotate(-1deg); }
 #app-root #ds-pricing-page .ds-carousel-frame small { font-size: 7px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
 #app-root #ds-pricing-page .ds-carousel-frame strong { max-width: 11ch; font-family: var(--font-heading, 'Manrope', sans-serif); font-size: clamp(15px,2vw,24px); letter-spacing: -.07em; line-height: .95; }
 #app-root #ds-pricing-page .ds-carousel-frame i { display: block; width: 34%; height: 4px; background: #498b74; }
-#app-root #ds-pricing-page .ds-social-static { position: absolute; right: 4%; bottom: 8%; width: 27%; min-height: 88px; padding: 13px 12px; border: 1px solid rgba(255,255,255,.27); background: #e6e8d8; color: #1a3440; box-shadow: 0 6px 14px #0b111620; transform: rotate(4deg); }
+#app-root #ds-pricing-page .ds-social-static { position: absolute; right: 4%; bottom: 8%; width: 27%; min-height: 88px; padding: 13px 12px; border: 1px solid rgba(255,255,255,.27); background: #e6e8d8; color: #1a3440; box-shadow: 0 18px 32px rgba(0,0,0,.22); transform: rotate(4deg); }
 #app-root #ds-pricing-page .ds-social-static span { display: block; font-size: 7px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
 #app-root #ds-pricing-page .ds-social-static strong { display: block; margin-top: 7px; font-family: var(--font-heading, 'Manrope', sans-serif); font-size: clamp(12px,1.6vw,19px); letter-spacing: -.06em; line-height: 1; }
 #app-root #ds-pricing-page .ds-social-static i { display: block; width: 28%; height: 3px; margin-top: 9px; background: #6eac94; }
 
 /* Search visibility study */
-#app-root #ds-pricing-page .ds-search-bar { position: absolute; top: 16%; left: 8%; display: flex; width: 63%; align-items: center; gap: 10px; padding: 10px 14px; border: 1px solid rgba(255,255,255,.18); border-radius: 30px; background: #f8f7f1; color: #3d535d; box-shadow: 0 6px 14px #0b111620; font-size: 10px; }
+#app-root #ds-pricing-page .ds-search-bar { position: absolute; top: 16%; left: 8%; display: flex; width: 63%; align-items: center; gap: 10px; padding: 10px 14px; border: 1px solid rgba(255,255,255,.18); border-radius: 30px; background: #f8f7f1; color: #3d535d; box-shadow: 0 14px 30px rgba(0,0,0,.2); font-size: 10px; }
 #app-root #ds-pricing-page .ds-search-lens { width: 12px; height: 12px; border: 1.6px solid #52716d; border-radius: 50%; }
 #app-root #ds-pricing-page .ds-search-lens::after { display: block; width: 5px; height: 1.6px; margin: 10px 0 0 8px; background: #52716d; content: ''; transform: rotate(45deg); transform-origin: left; }
-#app-root #ds-pricing-page .ds-search-result { position: absolute; top: 34%; left: 8%; width: 58%; padding: 14px 16px 15px; border: 1px solid rgba(146,215,189,.68); background: var(--dsp-art-paper); color: #223c48; box-shadow: 0 18px 38px rgba(0,0,0,.2); }
+#app-root #ds-pricing-page .ds-search-result { position: absolute; top: 34%; left: 8%; width: 58%; padding: 14px 16px 15px; border: 1px solid rgba(146,215,189,.68); background: #fffdf7; color: #223c48; box-shadow: 0 18px 38px rgba(0,0,0,.2); }
 #app-root #ds-pricing-page .ds-search-result small { color: #526c68; font-size: 8px; }
 #app-root #ds-pricing-page .ds-search-result strong { display: block; margin: 5px 0; color: #25634f; font-family: var(--font-heading, 'Manrope', sans-serif); font-size: 15px; letter-spacing: -.035em; }
 #app-root #ds-pricing-page .ds-search-result p { margin: 0; color: #53686d !important; font-size: 8px; line-height: 1.5; }
-#app-root #ds-pricing-page .ds-visibility-chart { position: absolute; right: 5%; bottom: 11%; width: 43%; height: 42%; padding: 13px 14px; border: 1px solid rgba(255,255,255,.18); background: #293736; box-shadow: 0 6px 14px #0b111620; }
+#app-root #ds-pricing-page .ds-visibility-chart { position: absolute; right: 5%; bottom: 11%; width: 43%; height: 42%; padding: 13px 14px; border: 1px solid rgba(255,255,255,.18); background: #203b49; box-shadow: 0 18px 35px rgba(0,0,0,.22); }
 #app-root #ds-pricing-page .ds-visibility-chart strong { display: block; color: #f4f0e7; font-size: 9px; font-weight: 700; }
 #app-root #ds-pricing-page .ds-visibility-chart small { display: block; margin-top: 2px; color: #a9bec0; font-size: 7px; }
 #app-root #ds-pricing-page .ds-visibility-chart svg { display: block; width: 100%; height: calc(100% - 35px); margin-top: 8px; overflow: visible; }
 
 /* Paid ad to inquiry journey */
 #app-root #ds-pricing-page .ds-paid-sequence { position: absolute; inset: 19% 5% 13%; display: grid; grid-template-columns: minmax(0,1fr) 28px minmax(0,1fr) 28px minmax(0,1fr); align-items: center; gap: 6px; }
-#app-root #ds-pricing-page .ds-paid-card { min-width: 0; min-height: 184px; padding: 12px 10px; border: 1px solid rgba(255,255,255,.34); background: var(--dsp-art-paper); color: var(--dsp-art-ink); box-shadow: 0 6px 14px #0b111620; }
+#app-root #ds-pricing-page .ds-paid-card { min-width: 0; min-height: 184px; padding: 12px 10px; border: 1px solid rgba(255,255,255,.34); background: #fffdf7; color: #193542; box-shadow: 0 19px 36px rgba(0,0,0,.24); }
 #app-root #ds-pricing-page .ds-paid-card:nth-of-type(2) { background: #e5eee7; transform: translateY(17px); }
 #app-root #ds-pricing-page .ds-paid-card:nth-of-type(3) { background: #f0e4d5; transform: translateY(-8px); }
 #app-root #ds-pricing-page .ds-paid-card small { display: block; margin-bottom: 8px; color: #4d8372; font-size: 7px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
-#app-root #ds-pricing-page .ds-paid-card strong { display: block; color: var(--dsp-art-ink); font-family: var(--font-heading, 'Manrope', sans-serif); font-size: clamp(13px,1.45vw,19px); letter-spacing: -.055em; line-height: 1.02; }
+#app-root #ds-pricing-page .ds-paid-card strong { display: block; color: #193542; font-family: var(--font-heading, 'Manrope', sans-serif); font-size: clamp(13px,1.45vw,19px); letter-spacing: -.055em; line-height: 1.02; }
 #app-root #ds-pricing-page .ds-paid-card p { margin: 8px 0 0; color: #5e6e73 !important; font-size: 8px; line-height: 1.4; }
 #app-root #ds-pricing-page .ds-paid-card .ds-paid-action { display: block; margin-top: 11px; padding: 5px 6px; background: #173746; color: white; text-align: center; font-size: 7px; font-weight: 700; }
 #app-root #ds-pricing-page .ds-paid-lines { display: grid; gap: 5px; margin-top: 12px; }
 #app-root #ds-pricing-page .ds-paid-lines i { height: 4px; background: #d2ddd6; }
 #app-root #ds-pricing-page .ds-paid-lines i:nth-child(2) { width: 72%; }
 #app-root #ds-pricing-page .ds-paid-lines i:nth-child(3) { width: 54%; }
-#app-root #ds-pricing-page .ds-paid-connector { color: #b9d2b9; font-size: 21px; text-align: center; }
+#app-root #ds-pricing-page .ds-paid-connector { color: #9ad6bd; font-size: 21px; text-align: center; }
 
-/* Pricing and inclusion comparison */
-#app-root #ds-pricing-page .ds-pricing-offer {
-  padding-top: 21px;
-  border-top: 1px solid var(--dsp-line);
-}
-
+#app-root #ds-pricing-page .ds-pricing-offer { margin-top: 29px; }
 #app-root #ds-pricing-page .ds-offer-heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px 36px;
-  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(150px, auto);
+  align-items: end;
+  gap: 20px;
+  margin-bottom: 21px;
 }
 
 #app-root #ds-pricing-page .ds-offer-heading h2 {
-  margin: 0;
-  color: var(--dsp-ink);
-  font: 700 clamp(1.75rem, 4vw, 2.8rem)/1.12 var(--font-heading, 'Manrope', sans-serif);
-  letter-spacing: -.054em;
-}
-
-#app-root #ds-pricing-page .ds-offer-heading p {
-  max-width: 64ch;
   margin: 7px 0 0;
-  color: var(--dsp-muted) !important;
-  font-size: .96rem;
-  line-height: 1.55;
+  font-size: clamp(1.7rem,3vw,2.55rem);
+  font-weight: 800;
+  letter-spacing: -.065em;
+  line-height: 1.04;
 }
 
-#app-root #ds-pricing-page .ds-pricing-quote-offer .ds-offer-heading { margin-bottom: 0; }
+#app-root #ds-pricing-page .ds-offer-heading p { max-width: 610px; margin: 9px 0 0; font-size: 14px; line-height: 1.65; }
+#app-root #ds-pricing-page .ds-offer-quote { display: inline-flex; min-height: 48px; align-items: center; justify-content: center; gap: 10px; padding: 11px 17px; border: 1px solid rgba(146,215,189,.3); background: #1b3543; color: #f5f4ef; font-size: 12px; font-weight: 750; cursor: pointer; transition: background-color .2s ease, color .2s ease, transform .2s ease; }
+#app-root #ds-pricing-page .ds-offer-quote:hover { background: var(--dsp-mint); color: var(--dsp-ink); transform: translateY(-2px); }
+#app-root #ds-pricing-page .ds-offer-quote span { color: var(--dsp-mint); font-size: 16px; }
+#app-root #ds-pricing-page .ds-offer-quote:hover span { color: var(--dsp-ink); }
 
-#app-root #ds-pricing-page .ds-offer-quote,
-#app-root #ds-pricing-page .ds-package-cta {
-  display: flex;
-  width: fit-content;
-  min-height: 45px;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 9px 13px;
-  border: 1px solid var(--dsp-accent);
-  border-radius: 6px;
-  background: var(--dsp-accent);
-  color: var(--dsp-paper);
-  font-size: .88rem;
-  font-weight: 750;
-  line-height: 1.25;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background-color .18s, color .18s;
+#app-root #ds-pricing-page .ds-package-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 15px; align-items: stretch; }
+#app-root #ds-pricing-page .ds-package-card { display: flex; min-width: 0; flex-direction: column; padding: clamp(19px,2.2vw,28px); border: 1px solid var(--dsp-line); background: var(--dsp-surface); color: var(--dsp-ink); box-shadow: 0 16px 38px rgba(0,0,0,.18); }
+#app-root #ds-pricing-page .ds-package-card.is-recommended { border-color: var(--dsp-mint-deep); box-shadow: 0 16px 38px rgba(43,128,107,.16); }
+#app-root #ds-pricing-page .ds-package-card h3 { margin: 0; font-size: clamp(1.32rem,1.7vw,1.75rem); font-weight: 800; letter-spacing: -.06em; line-height: 1.1; }
+#app-root #ds-pricing-page .ds-package-audience { min-height: 45px; margin: 9px 0 17px; color: var(--dsp-muted) !important; font-size: 12px; line-height: 1.5; }
+#app-root #ds-pricing-page .ds-package-card .ds-package-price { margin: 0 0 14px; color: var(--dsp-ink) !important; font-family: var(--font-heading, 'Manrope', sans-serif); font-size: clamp(1.75rem, 2.7vw, 2.6rem); font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: -.05em; line-height: 1.05; }
+#app-root #ds-pricing-page .ds-package-cta { display: flex; width: 100%; min-height: 47px; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 12px; border: 1px solid rgba(146,215,189,.3); background: #1b3543; color: #f5f4ef; cursor: pointer; font-size: 12px; font-weight: 750; text-align: left; text-decoration: none; transition: background-color .2s ease, color .2s ease, border-color .2s ease; }
+#app-root #ds-pricing-page .ds-package-cta:hover { background: var(--dsp-mint); color: #182b32; }
+#app-root #ds-pricing-page .ds-package-cta span:last-child { color: var(--dsp-mint); font-size: 17px; }
+#app-root #ds-pricing-page .ds-package-cta:hover span:last-child { color: inherit; }
+#app-root #ds-pricing-page .ds-package-section-title { margin: 22px 0 10px; color: var(--dsp-muted) !important; font-size: 10px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+#app-root #ds-pricing-page .ds-package-highlights { display: grid; gap: 9px; }
+#app-root #ds-pricing-page .ds-package-feed-total { display: flex; min-height: 70px; align-items: center; gap: 12px; padding: 11px 13px; border: 1px solid var(--dsp-line); background: rgba(255,255,255,.035); }
+#app-root #ds-pricing-page .ds-package-feed-total > span:last-child { display: flex; align-items: baseline; gap: 8px; }
+#app-root #ds-pricing-page .ds-package-feed-total strong { color: var(--dsp-mint); font-family: var(--font-heading, 'Manrope', sans-serif); font-size: 34px; font-weight: 800; letter-spacing: -.07em; line-height: 1; }
+#app-root #ds-pricing-page .ds-package-feed-total small { color: var(--dsp-ink-soft); font-size: 12px; font-weight: 700; }
+#app-root #ds-pricing-page .ds-deliverable-icon { display: inline-grid; width: 25px; height: 25px; flex: 0 0 25px; place-items: center; color: var(--dsp-mint); }
+#app-root #ds-pricing-page .ds-deliverable-icon svg { display: block; width: 21px; height: 21px; }
+#app-root #ds-pricing-page .ds-package-feed-total .ds-deliverable-icon { width: 31px; height: 31px; flex-basis: 31px; }
+#app-root #ds-pricing-page .ds-package-feed-total .ds-deliverable-icon svg { width: 27px; height: 27px; }
+#app-root #ds-pricing-page .ds-package-format-list { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 5px; }
+#app-root #ds-pricing-page .ds-package-format-row { display: grid; min-width: 0; grid-template-columns: 21px minmax(0,1fr); align-items: center; gap: 4px 6px; padding: 8px 6px; border: 1px solid var(--dsp-line); background: rgba(255,255,255,.022); }
+#app-root #ds-pricing-page .ds-package-format-row .ds-deliverable-icon { width: 21px; height: 21px; flex-basis: 21px; }
+#app-root #ds-pricing-page .ds-package-format-row .ds-deliverable-icon svg { width: 18px; height: 18px; }
+#app-root #ds-pricing-page .ds-package-format-row > span:nth-child(2) { overflow-wrap: anywhere; color: var(--dsp-ink-soft); font-size: 10px; line-height: 1.2; }
+#app-root #ds-pricing-page .ds-package-format-row strong { grid-column: 2; color: var(--dsp-ink); font-size: 13px; font-variant-numeric: tabular-nums; }
+#app-root #ds-pricing-page .ds-package-inclusion-row { display: flex; min-width: 0; align-items: flex-start; gap: 9px; padding: 10px 11px; border-top: 1px solid var(--dsp-line); color: var(--dsp-ink-soft); }
+#app-root #ds-pricing-page .ds-package-inclusion-row > span:last-child { display: grid; gap: 3px; min-width: 0; padding-top: 3px; }
+#app-root #ds-pricing-page .ds-package-inclusion-row strong { color: var(--dsp-ink); font-size: 11px; font-weight: 700; line-height: 1.4; }
+#app-root #ds-pricing-page .ds-package-inclusion-row small { color: var(--dsp-muted); font-size: 10px; line-height: 1.4; }
+#app-root #ds-pricing-page .ds-package-inclusion-row.is-trial { border: 1px solid rgba(146,215,189,.28); border-left: 2px solid var(--dsp-mint); background: rgba(146,215,189,.08); }
+#app-root #ds-pricing-page .ds-package-inclusion-row.is-trial .ds-deliverable-icon { color: var(--dsp-mint); }
+#app-root #ds-pricing-page .ds-package-inclusion-row.is-muted { opacity: .72; }
+#app-root #ds-pricing-page .ds-package-full-list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+#app-root #ds-pricing-page .ds-package-full-list li { position: relative; padding-left: 14px; color: var(--dsp-ink-soft); font-size: 12px; line-height: 1.5; }
+#app-root #ds-pricing-page .ds-package-full-list li::before { position: absolute; top: .62em; left: 0; width: 5px; height: 5px; border-radius: 50%; background: var(--dsp-mint-deep); content: ''; }
+#app-root #ds-pricing-page .ds-package-full { margin-top: 18px; padding-top: 15px; border-top: 1px solid var(--dsp-line); }
+#app-root #ds-pricing-page .ds-package-full .ds-package-section-title { margin-top: 0; }
+#app-root #ds-pricing-page .ds-unpriced-note { margin: 16px 0 0; color: var(--dsp-muted) !important; font-size: 11px; }
+#app-root #ds-pricing-page .ds-pricing-status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; clip-path: inset(50%); }
+
+@media (max-width: 1050px) {
+  #app-root #ds-pricing-page .ds-pricing-hero { grid-template-columns: minmax(0,1fr) minmax(210px,.55fr); }
+  #app-root #ds-pricing-page .ds-pricing-workbench { grid-template-columns: minmax(225px,.72fr) minmax(0,1.38fr); gap: 32px; }
 }
 
-#app-root #ds-pricing-page .ds-offer-quote { flex-shrink: 0; }
-#app-root #ds-pricing-page .ds-package-cta {
-  width: 100%;
-  margin-bottom: 15px;
-  border-color: var(--dsp-line);
-  background: transparent;
-  color: var(--dsp-accent);
+@media (max-width: 900px) {
+  #app-root #ds-pricing-page .ds-package-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
 }
 
-#app-root #ds-pricing-page :is(.ds-offer-quote, .ds-package-cta):hover {
-  border-color: var(--dsp-accent);
-  background: var(--dsp-panel);
-  color: var(--dsp-ink);
-}
-
-#app-root #ds-pricing-page .ds-package-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0;
-  border: 1px solid var(--dsp-line);
-  border-radius: 10px;
-  background: var(--dsp-surface);
-}
-
-#app-root #ds-pricing-page .ds-package-card {
-  display: grid;
-  min-width: 0;
-  grid-template-rows: auto auto auto auto 1fr;
-  align-content: start;
-  padding: clamp(16px, 2.4vw, 28px);
-}
-
-#app-root #ds-pricing-page .ds-package-card + .ds-package-card { border-left: 1px solid var(--dsp-line); }
-
-#app-root #ds-pricing-page .ds-package-card h3 {
-  margin: 0;
-  color: var(--dsp-ink);
-  font: 700 clamp(1.21rem, 2vw, 1.45rem)/1.2 var(--font-heading, 'Manrope', sans-serif);
-  letter-spacing: -.033em;
-}
-
-#app-root #ds-pricing-page .ds-package-card .ds-package-audience {
-  min-height: 3em;
-  margin: 7px 0 14px;
-  color: var(--dsp-muted) !important;
-  font-size: .88rem;
-  line-height: 1.48;
-}
-
-#app-root #ds-pricing-page .ds-package-card .ds-package-price {
-  margin: 0 0 17px;
-  color: var(--dsp-ink) !important;
-  font: 700 clamp(1.75rem, 3.5vw, 2.7rem)/1.05 var(--font-heading, 'Manrope', sans-serif);
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -.053em;
-}
-
-#app-root #ds-pricing-page .ds-package-inclusions { margin: 0; align-self: start; }
-
-#app-root #ds-pricing-page .ds-package-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-content: start;
-  align-items: baseline;
-  gap: 2px 8px;
-  min-width: 0;
-  padding: 9px 0;
-  border-top: 1px solid var(--dsp-line);
-  font-size: .88rem;
-  line-height: 1.44;
-}
-
-#app-root #ds-pricing-page .ds-package-row dt { color: var(--dsp-muted); }
-#app-root #ds-pricing-page .ds-package-row dd {
-  margin: 0;
-  color: var(--dsp-ink);
-  font-variant-numeric: tabular-nums;
-  font-weight: 700;
-  text-align: end;
-}
-#app-root #ds-pricing-page .ds-package-row:first-child dd { color: var(--dsp-accent); }
-
-#app-root #ds-pricing-page .ds-package-row .ds-package-row-note {
-  grid-column: 1 / -1;
-  color: var(--dsp-muted);
-  text-align: start;
-  font-size: .78rem;
-  font-weight: 500;
-}
-
-#app-root #ds-pricing-page .ds-pricing-offer .ds-package-note {
-  margin: 12px 0 0;
-  color: var(--dsp-muted) !important;
-  font-size: .83rem;
-}
-
-#app-root #ds-pricing-page .ds-pricing-status {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0,0,0,0);
-  white-space: nowrap;
-  clip-path: inset(50%);
-}
-
-/* The columns share header and inclusion row heights when subgrid is available.
-   Older browsers keep all labels and values in the normal card flow. */
-@supports (grid-template-rows: subgrid) {
-  @media (min-width: 721px) {
-    #app-root #ds-pricing-page .ds-package-card {
-      grid-template-rows: subgrid;
-      grid-row: span 11;
-    }
-
-    #app-root #ds-pricing-page .ds-package-inclusions {
-      display: grid;
-      grid-template-rows: subgrid;
-      grid-row: span 7;
-      align-self: stretch;
-    }
-
-    #app-root #ds-pricing-page .ds-package-card .ds-package-audience { min-height: 0; }
-  }
-}
-
-@media (max-width: 920px) {
-  #app-root #ds-pricing-page .ds-pricing-workbench { column-gap: 24px; }
-  #app-root #ds-pricing-page .ds-paid-sequence { grid-template-columns: minmax(0, 1fr) 14px minmax(0, 1fr) 14px minmax(0, 1fr); gap: 4px; }
-}
-
-@media (max-width: 720px) {
-  #app-root #ds-pricing-page .ds-pricing-hero { grid-template-columns: 1fr; }
-  #app-root #ds-pricing-page .ds-pricing-workbench {
-    grid-template: 'selector' auto 'offer' auto 'study' auto / minmax(0, 1fr);
-    row-gap: clamp(24px, 6vw, 36px);
-  }
-  #app-root #ds-pricing-page .ds-pricing-option { min-height: 56px; }
-  #app-root #ds-pricing-page .ds-offer-heading { align-items: flex-start; flex-direction: column; }
-  #app-root #ds-pricing-page .ds-package-grid { grid-template-columns: minmax(0, 1fr); }
-  #app-root #ds-pricing-page .ds-package-card + .ds-package-card {
-    border-left: 0;
-    border-top: 1px solid var(--dsp-line);
-  }
-  #app-root #ds-pricing-page .ds-package-card .ds-package-audience { min-height: 0; }
-  #app-root #ds-pricing-page .ds-pricing-artwork { --dsp-study-height: clamp(260px, 67vw, 350px); }
+@media (max-width: 760px) {
+  #app-root #ds-pricing-page { padding-top: 47px; }
+  #app-root #ds-pricing-page .ds-pricing-container { width: min(640px, calc(100% - 32px)); }
+  #app-root #ds-pricing-page .ds-pricing-hero { grid-template-columns: minmax(0,1fr); gap: 20px; margin-bottom: 37px; }
+  #app-root #ds-pricing-page .ds-pricing-hero > * { min-width: 0; }
+  #app-root #ds-pricing-page .ds-pricing-hero h1 { max-width: 11ch; margin-top: 15px; font-size: clamp(2.7rem,11vw,4.5rem); }
+  #app-root #ds-pricing-page .ds-pricing-intro { max-width: 520px; min-width: 0; margin: 0; overflow-wrap: break-word; }
+  #app-root #ds-pricing-page .ds-pricing-workbench { grid-template-columns: minmax(0,1fr); gap: 23px; }
+  #app-root #ds-pricing-page .ds-pricing-selector-heading { margin-bottom: 12px; }
+  #app-root #ds-pricing-page .ds-pricing-option { min-height: 70px; grid-template-columns: 31px minmax(0,1fr) 20px; padding-block: 11px; }
+  #app-root #ds-pricing-page .ds-pricing-marker { height: 70px; }
+  #app-root #ds-pricing-page .ds-pricing-option-title { font-size: clamp(1.14rem,5.2vw,1.5rem); }
+  #app-root #ds-pricing-page .ds-pricing-artwork,
+  #app-root #ds-pricing-page .ds-art-scene { min-height: 390px; }
+  #app-root #ds-pricing-page .ds-pricing-offer { margin-top: 22px; }
+  #app-root #ds-pricing-page .ds-offer-heading { grid-template-columns: 1fr; align-items: start; gap: 16px; }
+  #app-root #ds-pricing-page .ds-offer-quote { width: 100%; }
+  #app-root #ds-pricing-page .ds-package-grid { grid-template-columns: 1fr; gap: 12px; }
+  #app-root #ds-pricing-page .ds-package-audience { min-height: 0; }
+  #app-root #ds-pricing-page .ds-package-card { padding: 21px; }
 }
 
 @media (max-width: 520px) {
-  #app-root #ds-pricing-page .ds-art-caption { top: 12px; left: 14px; }
-  #app-root #ds-pricing-page .ds-art-note { right: 12px; bottom: 8px; font-size: .6rem; }
-  #app-root #ds-pricing-page .ds-browser-window { top: 17%; left: 5%; width: 79%; height: 67%; }
-  #app-root #ds-pricing-page .ds-site-nav { padding: 8px 9px 6px; }
-  #app-root #ds-pricing-page .ds-site-hero { min-height: 104px; padding: 9px 12px; }
-  #app-root #ds-pricing-page .ds-site-hero strong { font-size: clamp(17px, 6vw, 26px); }
-  #app-root #ds-pricing-page .ds-site-below { padding: 7px 12px; }
-  #app-root #ds-pricing-page .ds-mobile-frame { right: 4%; bottom: 9%; width: 28%; height: 65%; }
-  #app-root #ds-pricing-page .ds-social-reel { left: 4%; width: 28%; padding: 4px; }
-  #app-root #ds-pricing-page .ds-social-reel-screen { padding: 7px 5px; }
+  #app-root #ds-pricing-page .ds-pricing-artwork,
+  #app-root #ds-pricing-page .ds-art-scene { min-height: 352px; }
+  #app-root #ds-pricing-page .ds-art-caption { top: 16px; left: 17px; font-size: 9px; }
+  #app-root #ds-pricing-page .ds-art-note { right: 15px; bottom: 13px; font-size: 8px; }
+  #app-root #ds-pricing-page .ds-browser-window { top: 19%; left: 5%; width: 76%; height: 68%; }
+  #app-root #ds-pricing-page .ds-site-nav { padding: 10px 12px 7px; }
+  #app-root #ds-pricing-page .ds-site-hero { min-height: 128px; padding: 10px 13px 18px; }
+  #app-root #ds-pricing-page .ds-site-hero h3 { font-size: clamp(19px,7vw,29px); }
+  #app-root #ds-pricing-page .ds-site-below { padding: 9px 12px; }
+  #app-root #ds-pricing-page .ds-mobile-frame { right: 3%; bottom: 5%; width: 28%; height: 64%; }
+  #app-root #ds-pricing-page .ds-social-reel { left: 4%; width: 29%; }
   #app-root #ds-pricing-page .ds-social-carousel { left: 36%; width: 42%; }
-  #app-root #ds-pricing-page .ds-social-static { right: 3%; width: 28%; min-height: 67px; padding: 7px; }
-  #app-root #ds-pricing-page .ds-search-result { top: 35%; left: 5%; width: 63%; padding: 9px; }
-  #app-root #ds-pricing-page .ds-visibility-chart { right: 4%; bottom: 12%; width: 50%; height: 38%; padding: 8px; }
-  #app-root #ds-pricing-page .ds-paid-sequence { inset: 15% 4% 10%; }
-  #app-root #ds-pricing-page .ds-paid-card { min-height: 130px; padding: 8px 5px; }
-  #app-root #ds-pricing-page .ds-paid-card strong { font-size: clamp(10px, 3vw, 14px); overflow-wrap: anywhere; }
-  #app-root #ds-pricing-page .ds-paid-card p,
-  #app-root #ds-pricing-page .ds-paid-action { overflow-wrap: anywhere; }
+  #app-root #ds-pricing-page .ds-social-static { right: 3%; width: 28%; min-height: 75px; padding: 10px 8px; }
+  #app-root #ds-pricing-page .ds-search-bar { top: 17%; left: 5%; width: 72%; }
+  #app-root #ds-pricing-page .ds-search-result { top: 36%; left: 5%; width: 63%; padding: 11px; }
+  #app-root #ds-pricing-page .ds-visibility-chart { right: 3%; bottom: 9%; width: 50%; height: 38%; padding: 10px; }
+  #app-root #ds-pricing-page .ds-paid-sequence { inset: 18% 5% 12%; grid-template-columns: minmax(0,1fr) 16px minmax(0,1fr) 16px minmax(0,1fr); gap: 3px; }
+  #app-root #ds-pricing-page .ds-paid-card { min-height: 165px; padding: 9px 6px; }
+  #app-root #ds-pricing-page .ds-paid-card strong { font-size: clamp(11px,3.2vw,14px); }
+  #app-root #ds-pricing-page .ds-paid-card p { font-size: 7px; }
   #app-root #ds-pricing-page .ds-paid-connector { font-size: 15px; }
+}
+
+@media (hover: none), (pointer: coarse) {
+  #app-root #ds-pricing-page .ds-art-scene { transform: none !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   #app-root #ds-pricing-page *,
   #app-root #ds-pricing-page *::before,
   #app-root #ds-pricing-page *::after {
-    animation: none !important;
-    transition: none !important;
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
   }
+  #app-root #ds-pricing-page .ds-art-scene { transform: none !important; }
 }
 
 #ds-quote-modal .ds-q-selection {
   margin: 0 0 12px;
   padding: 10px 12px;
-  border-left: 2px solid var(--ed-accent, #b9d2b9);
-  background: var(--ed-panel, #1d282c);
-  color: var(--ed-ink, #f2eee4);
+  border-left: 2px solid #43c6b4;
+  background: rgba(67,198,180,.09);
+  color: #e2f3ec;
   font-size: 12px;
   line-height: 1.5;
 }
+
+html.light #ds-quote-modal .ds-q-selection { color: #285249; }
